@@ -108,7 +108,7 @@ END Glitch hello-app default styles
 ******************************************************************************/
 
 body {
-  font-family: Coming Soon;
+  font-family: "Coming Soon";
   background-color: var(--color-bg);
   /*background-image: url("https://cdn.glitch.global/3887513c-cf0e-4995-8c2a-2f66f095b4cf/IMG_0307.png?v=1743658390174");*/
   background-size: cover;
