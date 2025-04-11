@@ -1,0 +1,360 @@
+/******************************************************************************
+START Glitch hello-app default styles
+
+The styles in this section do some minimal CSS resets, set default fonts and 
+colors, and handle the layout for our footer and "Remix on Glitch" button. If
+you're new to CSS they may seem a little complicated, but you can scroll down
+to this section's matching END comment to see page-specific styles.
+******************************************************************************/
+
+/* 
+  The style rules specify elements by type and by attributes such as class and ID
+  Each section indicates an element or elements, then lists the style properties to apply
+  See if you can cross-reference the rules in this file with the elements in index.html
+*/
+
+/* Our default values set as CSS variables */
+:root {
+  --color-bg: #FFFFF0;
+  --color-text-main: #4D1F00;
+  --color-text-header: #4D1F00;
+  --color-primary: #fffff0;
+  --wrapper-height: 87vh;
+  --image-max-width: 300px;
+  --image-margin: 3rem;
+  --font-family: "Coming Soon";
+  --font-family-header: "Coming Soon";
+}
+
+
+
+
+/* Basic page style resets */
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+
+/* Import fonts */
+.coming-soon-regular {
+  font-family: "Coming Soon", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+/* Navigation grid */
+
+.titleArea{
+  
+  background-color: #FFFFF0;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 0px;
+  text-align: center;
+}
+
+.image-button-list a {
+  text-decoration: none;
+  color: inherit;
+}
+.image-button-list a p{
+  text-decoration: none;
+}
+
+.image-button-list a:hover{
+  
+  filter: none;  /* Remove any filters */
+  
+  
+}
+
+.nav {
+  font-family: "Coming Soon";
+  list-style-type: none; /* Remove bullets */
+  margin: 0;
+  padding: 0;
+  display: flex; /* Make it horizontal */
+  gap: 30px; /* Space between items (optional) */
+  justify-content: center;
+  text-align: center;
+}
+
+.nav li a {
+  text-decoration: none;
+  padding: 0;
+  display: block;
+  color: black;
+  background-color: none;
+  border-radius: 5px;
+}
+
+.nav li a:hover {
+  background-color: none;
+  
+}
+
+
+
+
+.divider {
+  padding: 0 1rem;
+}
+/******************************************************************************
+END Glitch hello-app default styles
+******************************************************************************/
+
+body {
+  font-family: Coming Soon;
+  background-color: var(--color-bg);
+  /*background-image: url("https://cdn.glitch.global/3887513c-cf0e-4995-8c2a-2f66f095b4cf/IMG_0307.png?v=1743658390174");*/
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+}
+
+/* Page structure */
+.wrapper {
+  background-color: none;
+  padding: 52px;
+  text-align: center;
+  
+  min-height: var(--wrapper-height);
+  display: grid;
+  place-items: center;
+  margin: 0 0rem;
+}
+*
+
+/* 🔁 When screen is smaller than 600px (wrap likely happens) */
+/*
+@media (max-width: 600px) {
+  .wrapper {
+    background-color: lightcoral;
+  }
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+*/
+
+/* Very light scaling for our illustration */
+.title {
+  color: var(--color-text-header);
+  font-family: "Coming Soon";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 105%;
+  margin: 0;
+  margin-top: 20px;
+   
+}
+
+
+/* Very light scaling for our illustration */
+.illustration {
+  max-width: 100%;
+  max-height: var(--image-max-width);
+  margin-top: var(--image-margin);
+  
+}
+
+
+/* Instructions */
+.instructions {
+  margin: 1rem auto 0;
+  text-align: center;
+  
+}
+
+/* Button - Add it from the README instructions */
+button,
+input {
+  font-family: inherit;
+  font-size: 100%;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  transition: 500ms;
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn-link:hover {
+  background-color: deepskyblue;
+}
+.image-button-list{
+  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 5 columns */
+  grid-template-rows: repeat(2, 1fr); /*auto 5 columns */
+  gap: 5px;
+  justify-content: center;
+  list-style: none;
+  
+  
+}
+.image-button-list li.empty {
+  /*min-height: 150px; Optional: give it a min-height so it's still visible */
+  
+  margin-left: 50px;
+  margin-right: 50px;
+  background: transparent; /* Or you can add a subtle background */
+}
+.bt
+{ 
+ 
+  width:  65%;
+  height: auto;
+  background: none;
+  text-align: center;
+  line-height: 100px;
+  border-radius: 10px;
+  
+  
+   
+}
+.bt:hover
+{
+  filter: brightness(0.8); /* Makes the image darker, adjust the value as needed */
+  transition: filter 0.3s ease;  /* Smooth transition effect */
+}
+.interactive_project_bt{
+ 
+  width:  110%;
+  height: auto;
+  margin: 0 auto;/*Centers it horizontally (top-bottom margin = 0, left-right = auto).*/
+  margin-top: 20px;
+  margin-left: 50px;
+}
+.game_project_bt{
+  /*border: 1px solid red;*/
+  width:  110%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 20px;
+ transform: translateX(-75px);
+}
+.vfx_project_bt{
+  width:  80%;
+  height: auto;
+  margin: 0 auto;
+  
+  
+}
+.animation_project_bt{
+   
+  height: auto;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-left: 50px;
+  width:  80%;
+}
+.modeling_project_bt{
+   width:  80%;
+  height: auto;
+  margin: 0 auto;
+  margin-right: 50px;
+  margin-top: 30px;
+  
+}
+
+/* When screen is 600px or smaller (mobile) */
+@media (max-width: 600px) {
+  .image-button-list {
+    /* single column */
+    /* grid-template-columns: 1fr; 
+    grid-auto-flow: row;
+    */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  
+  .vfx_project_bt,
+.animation_project_bt,
+.modeling_project_bt{
+   width:  100%;
+  height: auto;
+  
+}
+  
+  .image-button-list li button {
+   
+    width: 80%; /* make buttons stretch */
+  }
+  .nav {
+  
+  display: none; 
+  }
+ 
+  .interactive_project_bt,
+.game_project_bt,
+.vfx_project_bt,
+.animation_project_bt,
+.modeling_project_bt{
+  transform: none;         /* remove shift */
+    margin-left: auto;
+    margin-right: auto;
+  margin-top: auto;
+    width: 100%;            
+  
+  order: 5;
+}
+ .interactive_project_bt{
+    order: 0;
+  }
+  .game_project_bt{
+    order: 1;
+  }
+  
+}
+
+/* Subheading */
+h2 {
+  color: var(--color-text-header);
+}
+
+/* Interactive image */
+.illustration:active {
+  transform: translateY(5px);
+}
+
+/* Button dip
+- Toggling this class on and off will move it down and up again
+- The button transition property above determines the speed of the translate (500ms)
+*/
+.dipped {
+  transform: translateY(5px);
+}
+
+
+/* Links that open files in the editor */
+.fileopener {
+  cursor: pointer;
+  font-weight: bold;
+  border-bottom: 3px solid var(--color-primary);
+  color: var(--color-secondary);
+}
+.fileopener:hover {
+  border-bottom: 3px solid var(--color-secondary);
+}
