@@ -1,1 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+      This is an HTML comment
+      You can write text in a comment and the content won't be visible in the page
+    -->
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="https://glitch.com/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap"
+      rel="stylesheet"
+    />
+    <!--
+      This is the page head - it contains info the browser uses
+      Like the title, which appears on the browser tab but not inside the page
+      Further down you'll see the content that displays in the page
+    -->
+    <title class="title">Sophie Juang Portfolio</title>
+
+    <!-- The website stylesheet -->
+    <link rel="stylesheet" href="/p1_interactive_style.css" />
+
+    <!-- The website JavaScript file -->
+    <script src="/p1_interactive_js.js" defer></script>
+  </head>
+  <body>
+    <!--
+      The body includes the content you see in the page
+      Each element is defined using tags, like this <div></div>
+      The attributes like class="wrapper" let us style elements in the CSS
+    -->
+
+    <div class="titleArea">
+      <h1 class="title">Sophie Juang</h1>
+      <div class="instructions">
+        <p></p>
+      </div>
+      <ul class="nav">
+        <li><a href="index.html">Home|Menu</a></li>
+        <li><a href="p1_interactive_p.html">Interactive</a></li>
+        <li><a href="p2_game_p.html">Game</a></li>
+        <!--<li><a href="p3_interactive_p.html">3D</a></li>-->
+        <li><a href="p4_interactive_p.html">About Me|Contact</a></li>
+      </ul>
+    </div>
+    <div class="wrapper">
+      <!-- 1 -->
+      <div id="i1" class="Journey_section">
+        <div>
+          <h2 class="subtitle">Journey</h2>
+          <p class="introduce">
+            Enjoy music on a forest train journey and color the forest with any
+            melody you make. Make a sound with Arduino Adafruit Circuit
+            playground to change the color of trees in the forest. Make other
+            interactions with the photoresistor and a button.
+          </p>
+          <p>
+            <a
+              href="https://drive.google.com/file/d/1i5RkzV_CtA0zl7i3YupLdtKy_Hr-fjK_/view?usp=drive_link"
+              target="_blank"
+            >
+              Detail Introduction
+            </a>
+          </p>
+        </div>
+
+        <div class="Journey_video_layout">
+          <div class="Journey_left_video">
+            <video controls>
+              <source
+                src="https://cdn.glitch.me/3887513c-cf0e-4995-8c2a-2f66f095b4cf/IMG_8604.MOV?v=1743956886201"
+              />
+            </video>
+          </div>
+          <div class="Journey_right_video">
+            <video controls>
+              <source
+                src="https://cdn.glitch.me/3887513c-cf0e-4995-8c2a-2f66f095b4cf/Journey_Day.MOV?v=1743957076201"
+              />
+            </video>
+            <video controls>
+              <source
+                src="https://cdn.glitch.me/3887513c-cf0e-4995-8c2a-2f66f095b4cf/Journey_Night.MOV?v=1743957115695"
+              />
+            </video>
+          </div>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div id="i2" class="glight_section">
+        <script>
+          // List of colors to cycle through
+          const colors = [
+            "#f0f8ff",
+            "#ffcccb",
+            "#d1e7dd",
+            "#fff3cd",
+            "#dbeafe",
+          ];
+          let colorIndex = 0;
+
+          document.addEventListener("keydown", () => {
+            // Change the background color of the body
+            document.body.style.backgroundColor = colors[colorIndex];
+            wrapper.style.backgroundColor= colors[colorIndex];
+            // Go to the next color, loop back to start if needed
+            colorIndex = (colorIndex + 1) % colors.length;
+          });
+        </script>
+        <div>
+          <h2 class="subtitle">Gift me Light</h2>
+          <p class="introduce">
+            Change the lights and music by placing different colored gifts under
+            the Christmas tree.
+          </p>
+          <p>
+            <a
+              href="https://drive.google.com/file/d/1w6sesmb2adhG5qZKPntRTlao8tMS3Y8I/view?usp=drive_link"
+              target="_blank"
+            >
+              Detail Introduction
+            </a>
+          </p>
+        </div>
+
+        <div class="glight_layout">
+          <video controls class="glight_video">
+            <source
+              src="https://cdn.glitch.me/3887513c-cf0e-4995-8c2a-2f66f095b4cf/SophieJuang_FinalProject.mov?v=1744054099098"
+            />
+          </video>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div id="i3" class="other_section"></div>
+    </div>
+    <div class="instructions">
+      <p>© 2025 Sophie Juang. All rights reserved.</p>
+    </div>
+  </body>
+</html>
 
