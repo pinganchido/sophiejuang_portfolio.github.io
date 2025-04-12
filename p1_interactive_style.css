@@ -35,6 +35,12 @@ to this section's matching END comment to see page-specific styles.
   display: none !important;
 }
 
+/* Import fonts */
+.coming-soon-regular {
+  font-family: "Coming Soon", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
 
 
 /* Navigation grid */
@@ -85,8 +91,7 @@ to this section's matching END comment to see page-specific styles.
 END Glitch hello-app default styles
 ******************************************************************************/
 
-body {
-  font-family: 'Coming Soon', cursive;
+body {  
   font-family: "Coming Soon";
   background-color: var(--color-bg);
   margin: 0;
