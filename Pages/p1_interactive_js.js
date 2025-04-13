@@ -60,7 +60,7 @@ const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
 let bgIndex = 0;
 
 // Listen for key press
-/*document.addEventListener("click", () => {
+document.addEventListener("click", () => {
   const scrollY = window.scrollY;
   const i2Top = document.getElementById("i2").offsetTop;
   const i2Bottom = i2Top + document.getElementById("i2").offsetHeight;
@@ -73,4 +73,4 @@ let bgIndex = 0;
   }
 });
 
-*/
+
