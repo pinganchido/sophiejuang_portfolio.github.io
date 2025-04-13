@@ -32,72 +32,56 @@ const filer = document.querySelectorAll(".fileopener");
 filer.forEach((f) => {
   f.onclick = () => { goto(f.dataset.file, f.dataset.line); };
 });
-//scrolling
-window.addEventListener("scroll", function () {
-  const scrollY = window.scrollY;
-  const i1 = document.getElementById("i1").offsetTop;
-  const i2 = document.getElementById("i2").offsetTop;
-  const i3 = document.getElementById("i3").offsetTop;
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const i2_section = document.getElementById("i2");
+  const glight_video = document.getElementById("glight_video");
   const wrapper = document.querySelector(".wrapper");
-  
-  if (scrollY >= i3 ) {
-    document.body.style.backgroundColor = "lightcoral";
-    wrapper.style.backgroundColor = "lightcoral";
-  } else if (scrollY >= i2) {
-    document.body.style.backgroundColor = "lightblue";
-    wrapper.style.backgroundColor = "lightblue";
-  } else {
-    document.body.style.backgroundColor = "#F0FFF0"	;
-     wrapper.style.backgroundColor = "#F0FFF0";
-  }
-});
 
-// Get the section element
+  const i2_oriCol = "lightblue"; // original i2 color
+  const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
+  let bgIndex = 0;
 
-const i2_oriCol = "lightblue";
-// Define colors and index
-const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
-let bgIndex = 0;
-
-//get video
-const glight_video = document.getElementById("glight_video");
-//get i2 part
-const i2_section = document.getElementById("i2");
-const wrapper = document.querySelector(".wrapper");
-
-// Listen for key press
-document.addEventListener("click", () => {
-  const scrollY = window.scrollY;
-  const i2Top = document.getElementById("i2").offsetTop;
-  const i2Bottom = i2Top + document.getElementById("i2").offsetHeight;
-  
-
-
-  if (scrollY >= i2Top && scrollY < i2Bottom) {
-    wrapper.style.backgroundColor = bgColors[bgIndex];
+  // 🖱️ Click inside #i2 to change background
+  i2_section.addEventListener("click", () => {
+    i2_section.style.backgroundColor = bgColors[bgIndex];
     bgIndex = (bgIndex + 1) % bgColors.length;
-  } else {
-    wrapper.style.backgroundColor = "#ff0000"; // Remove background override
-  }
-});
+  });
 
-glight_video.addEventListener("timeUpdate", () => {
+  // 🎥 Change color based on video time
+  glight_video.addEventListener("timeupdate", () => {
     const currTime = glight_video.currentTime;
 
-    if(currTime >= 60 && currTime < 120)//seconds
-    {
-        i2_section.style.backgroundColor = "#ff0000";
+    if (currTime >= 60 && currTime < 120) {
+      i2_section.style.backgroundColor = "#ff0000"; // red
+    } else if (currTime >= 120) {
+      i2_section.style.backgroundColor = "#0000ff"; // blue
+    } else {
+      i2_section.style.backgroundColor = i2_oriCol; // default
     }
-    else if (currTime >= 120) {
-    i2_section.style.backgroundColor = "#0000ff";
-     
-  } else {
-    i2_section.style.backgroundColor = "#00ff00"; // or any default
-  }
+  });
 
+  // 🧭 Scroll background change for wrapper & body
+  window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+    const i1 = document.getElementById("i1").offsetTop;
+    const i2 = document.getElementById("i2").offsetTop;
+    const i3 = document.getElementById("i3").offsetTop;
 
-   
-} );
+    if (scrollY >= i3) {
+      document.body.style.backgroundColor = "lightcoral";
+      wrapper.style.backgroundColor = "lightcoral";
+    } else if (scrollY >= i2) {
+      document.body.style.backgroundColor = "lightblue";
+      wrapper.style.backgroundColor = "lightblue";
+    } else {
+      document.body.style.backgroundColor = "#F0FFF0";
+      wrapper.style.backgroundColor = "#F0FFF0";
+    }
+  });
+});
 
 //section 1 leaves
 let leaves = [];
