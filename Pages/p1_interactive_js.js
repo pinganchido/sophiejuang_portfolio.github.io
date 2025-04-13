@@ -77,7 +77,7 @@ document.addEventListener("click", () => {
     wrapper.style.backgroundColor = bgColors[bgIndex];
     bgIndex = (bgIndex + 1) % bgColors.length;
   } else {
-    wrapper.style.backgroundColor = ""; // Remove background override
+    wrapper.style.backgroundColor = "#ff0000"; // Remove background override
   }
 });
 
