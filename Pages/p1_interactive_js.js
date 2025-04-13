@@ -63,14 +63,14 @@ let bgIndex = 0;
 const glight_video = document.getElementById("myVideo");
 //get i2 part
 const i2_section = document.getElementById("i2");
-
+const wrapper = document.querySelector(".wrapper");
 
 // Listen for key press
 document.addEventListener("click", () => {
   const scrollY = window.scrollY;
   const i2Top = document.getElementById("i2").offsetTop;
   const i2Bottom = i2Top + document.getElementById("i2").offsetHeight;
-  const wrapper = document.querySelector(".wrapper");
+  
 
 
   if (scrollY >= i2Top && scrollY < i2Bottom) {
@@ -84,12 +84,12 @@ document.addEventListener("click", () => {
 glight_video.addEventListener("timeUpdate", () => {
     const currTime = glight_video.currTime;
 
-    if(currTime >= 60 && currTime < 120)
+    if(currTime >= 60 && currTime < 120)//seconds
     {
-        i2_section.style.backgroundColor = "#ffd1dc";
+        i2_section.style.backgroundColor = "#ff0000";
     }
     else if (currentTime >= 120) {
-    i2_section.style.backgroundColor = "#d0f0c0"; 
+    wrtapper.style.backgroundColor = "#d0f0c0"; 
   } else {
     i2_section.style.backgroundColor = "transparent"; // or any default
   }
