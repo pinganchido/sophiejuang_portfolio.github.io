@@ -59,12 +59,20 @@ const i2_oriCol = "lightblue";
 const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
 let bgIndex = 0;
 
+//get video
+const glight_video = document.getElementById("myVideo");
+//get i2 part
+const i2_section = document.getElementById("i2");
+
+
 // Listen for key press
 document.addEventListener("click", () => {
   const scrollY = window.scrollY;
   const i2Top = document.getElementById("i2").offsetTop;
   const i2Bottom = i2Top + document.getElementById("i2").offsetHeight;
   const wrapper = document.querySelector(".wrapper");
+
+
   if (scrollY >= i2Top && scrollY < i2Bottom) {
     wrapper.style.backgroundColor = bgColors[bgIndex];
     bgIndex = (bgIndex + 1) % bgColors.length;
@@ -72,5 +80,24 @@ document.addEventListener("click", () => {
     wrapper.style.backgroundColor = ""; // Remove background override
   }
 });
+
+glight_video.addEventListener("timeUpdate", () => {
+    const currTime = glight_video.currTime;
+
+    if(currTime >= 60 && currTime < 120)
+    {
+        i2_section.style.backgroundColor = "#ffd1dc";
+    }
+    else if (currentTime >= 120) {
+    i2_section.style.backgroundColor = "#d0f0c0"; 
+  } else {
+    i2_section.style.backgroundColor = "transparent"; // or any default
+  }
+
+
+   
+} );
+
+
 
 

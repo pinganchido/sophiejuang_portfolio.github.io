@@ -103,7 +103,7 @@ body {
   background-color: #FFFFF4;
   padding-left: 20px;
   text-align: center;
-  transition: background-color 0.5s ease; /* 👈 smooth 1 second transition */
+  transition: background-color 0.5s ease; 
 
   min-height: var(--wrapper-height);
   display: grid;
