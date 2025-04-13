@@ -60,7 +60,7 @@ const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
 let bgIndex = 0;
 
 //get video
-const glight_video = document.getElementById("myVideo");
+const glight_video = document.getElementById("glight_ideo");
 //get i2 part
 const i2_section = document.getElementById("i2");
 const wrapper = document.querySelector(".wrapper");
