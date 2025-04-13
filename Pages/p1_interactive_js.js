@@ -53,7 +53,7 @@ window.addEventListener("scroll", function () {
 });
 
 // Get the section element
-const section = document.getElementById("i2");
+
 const i2_oriCol = "lightblue";
 // Define colors and index
 const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
@@ -104,11 +104,18 @@ let leaves = [];
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
-  canvas.parent('i1');//id in html
+  const section = document.getElementById('sketch-holder');
+  let canvas = createCanvas(section.offsetWidth, section.offsetHeight);
+  canvas.parent('sketch-holder');
+  canvas.style('position', 'absolute');
+  canvas.style('top', '0');
+  canvas.style('left', '0');
+  canvas.style('z-index', '-1'); // Optional: put behind text
+  clear(); // ensure it's transparent
 }
 
 function draw() {
-  background(255, 255, 255, 20); // translucent white for trailing effect
+ clear(); // translucent white for trailing effect
 
   for (let i = leaves.length - 1; i >= 0; i--) {
     leaves[i].update();
