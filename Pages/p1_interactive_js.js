@@ -103,7 +103,7 @@ glight_video.addEventListener("timeUpdate", () => {
 let leaves = [];
 
 function setup() {
-  let canvas = createCanvas(windowWidth, windowHeight);
+  //let canvas = createCanvas(windowWidth, windowHeight);
   const section = document.getElementById('sketch-holder');
   let canvas = createCanvas(section.offsetWidth, section.offsetHeight);
   canvas.parent('sketch-holder');
