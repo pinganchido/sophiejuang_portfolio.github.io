@@ -60,7 +60,7 @@ const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
 let bgIndex = 0;
 
 //get video
-const glight_video = document.getElementById("glight_ideo");
+const glight_video = document.getElementById("glight_video");
 //get i2 part
 const i2_section = document.getElementById("i2");
 const wrapper = document.querySelector(".wrapper");
@@ -89,7 +89,7 @@ glight_video.addEventListener("timeUpdate", () => {
         i2_section.style.backgroundColor = "#ff0000";
     }
     else if (currentTime >= 120) {
-    wrtapper.style.backgroundColor = "#d0f0c0"; 
+    wrapper.style.backgroundColor = "#d0f0c0"; 
   } else {
     i2_section.style.backgroundColor = "transparent"; // or any default
   }
