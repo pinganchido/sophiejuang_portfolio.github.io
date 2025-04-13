@@ -89,9 +89,10 @@ glight_video.addEventListener("timeUpdate", () => {
         i2_section.style.backgroundColor = "#ff0000";
     }
     else if (currentTime >= 120) {
-    wrapper.style.backgroundColor = "#d0f0c0"; 
+    i2_section.style.backgroundColor = "#ff0000";
+    //wrapper.style.backgroundColor = "#0000ff"; 
   } else {
-    i2_section.style.backgroundColor = "transparent"; // or any default
+    i2_section.style.backgroundColor = "#00ff00"; // or any default
   }
 
 
