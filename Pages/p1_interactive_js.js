@@ -44,13 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
   let bgIndex = 0;
 
-  // 🖱️ Click inside #i2 to change background
-  i2_section.addEventListener("click", () => {
+  //  Click inside #i2 to change background
+ /* i2_section.addEventListener("click", () => {
     i2_section.style.backgroundColor = bgColors[bgIndex];
     bgIndex = (bgIndex + 1) % bgColors.length;
   });
-
-  // 🎥 Change color based on video time
+  */
+  // Change color based on video time
   glight_video.addEventListener("timeupdate", () => {
     const currTime = glight_video.currentTime;
 
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 🧭 Scroll background change for wrapper & body
+  // Scroll background change for wrapper & body
   window.addEventListener("scroll", () => {
     const scrollY = window.scrollY;
     const i1 = document.getElementById("i1").offsetTop;
@@ -88,7 +88,7 @@ let leaves = [];
 
 function setup() {
   //let canvas = createCanvas(windowWidth, windowHeight);
-  const section = document.getElementById('sketch-holder');
+  const section = document.getElementById('i1');
   let canvas = createCanvas(section.offsetWidth, section.offsetHeight);
   canvas.parent('sketch-holder');
   canvas.style('position', 'absolute');
