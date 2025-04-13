@@ -82,15 +82,15 @@ document.addEventListener("click", () => {
 });
 
 glight_video.addEventListener("timeUpdate", () => {
-    const currTime = glight_video.currTime;
+    const currTime = glight_video.currentTime;
 
     if(currTime >= 60 && currTime < 120)//seconds
     {
         i2_section.style.backgroundColor = "#ff0000";
     }
-    else if (currentTime >= 120) {
-    i2_section.style.backgroundColor = "#ff0000";
-    //wrapper.style.backgroundColor = "#0000ff"; 
+    else if (currTime >= 120) {
+    i2_section.style.backgroundColor = "#0000ff";
+     
   } else {
     i2_section.style.backgroundColor = "#00ff00"; // or any default
   }
@@ -99,6 +99,61 @@ glight_video.addEventListener("timeUpdate", () => {
    
 } );
 
+//section 1 leaves
+let leaves = [];
+
+function setup() {
+  let canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent('i1');//id in html
+}
+
+function draw() {
+  background(255, 255, 255, 20); // translucent white for trailing effect
+
+  for (let i = leaves.length - 1; i >= 0; i--) {
+    leaves[i].update();
+    leaves[i].show();
+    if (leaves[i].offScreen()) {
+      leaves.splice(i, 1);
+    }
+  }
+}
+
+function mousePressed() {
+  for (let i = 0; i < 5; i++) {
+    leaves.push(new Leaf(mouseX, mouseY));
+  }
+}
+
+class Leaf {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+    this.vel = createVector(random(-1, 1), random(1, 3));
+    this.angle = random(TWO_PI);
+    this.rotation = random(-0.05, 0.05);
+    this.size = random(20, 40);
+  }
+
+  update() {
+    this.pos.add(this.vel);
+    this.angle += this.rotation;
+  }
+
+  show() {
+    push();
+    translate(this.pos.x, this.pos.y);
+    rotate(this.angle);
+    // Draw a simple leaf shape (you can replace with image)
+    fill(139, 69, 19); // brown
+    noStroke();
+    ellipse(0, 0, this.size, this.size / 2);
+    pop();
+  }
+
+  offScreen() {
+    return this.pos.y > height;
+  }
+}
 
 
 
