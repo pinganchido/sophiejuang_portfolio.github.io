@@ -150,12 +150,23 @@ body {
   max-height: var(--image-max-width);
   margin-top: var(--image-margin);
 }
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .section {
+  width: 100vw
   height: 100vh; /* full screen height */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2em;
+
+   
+
 }
 .introduce {
    max-width: 800px;         /* Set the max width of the paragraph */
