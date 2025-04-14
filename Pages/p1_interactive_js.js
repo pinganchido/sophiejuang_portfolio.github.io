@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const glight_video = document.getElementById("glight_video");
   const wrapper = document.querySelector(".wrapper");
 
-  const i2_oriCol = "lightblue"; // original i2 color
+  const i2_oriCol = ; "b6b6b6"// original i2 color "lightblue"
   const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
   let bgIndex = 0;
 
@@ -54,11 +54,23 @@ document.addEventListener("DOMContentLoaded", function () {
   glight_video.addEventListener("timeupdate", () => {
     const currTime = glight_video.currentTime;
 
-    if (currTime >= 60 && currTime < 120) {
-      i2_section.style.backgroundColor = "#ff0000"; // red
-    } else if (currTime >= 120) {
-      i2_section.style.backgroundColor = "#0000ff"; // blue
-    } else {
+    if (currTime >= 0 && currTime < 9) {
+      i2_section.style.backgroundColor = "#f4e190"; // yellow
+    } else if (currTime >= 0 && currTime < 9) {
+      i2_section.style.backgroundColor = "#f6ecfo"; // white
+      
+    }else if (currTime >= 0 && currTime < 9) {
+      i2_section.style.backgroundColor = "#bbd19e"; // green
+    } 
+    else if (currTime >= 0 && currTime < 9) {
+      i2_section.style.backgroundColor = "#7f904d"; // blue
+
+    }
+    else if (currTime >= 0 && currTime < 9) {
+      i2_section.style.backgroundColor = "#e89696"; // red
+
+    }
+    else {
       i2_section.style.backgroundColor = i2_oriCol; // default
     }
   });
