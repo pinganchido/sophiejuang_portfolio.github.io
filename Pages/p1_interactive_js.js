@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
       i2_section.style.backgroundColor = "#f4e190"; // yellow
     } 
     else if (currTime >= 33 && currTime < 57) {
-      i2_section.style.backgroundColor = "#f6ecfo"; // white
+      i2_section.style.backgroundColor = "#f6ecf0"; // white
       
     }
     else if (currTime >= 62 && currTime < 82) {
