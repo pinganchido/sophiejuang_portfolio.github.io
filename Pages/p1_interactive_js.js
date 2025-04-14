@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const glight_video = document.getElementById("glight_video");
   const wrapper = document.querySelector(".wrapper");
 
-  const i2_oriCol =  "b6b6b6";// original i2 color "lightblue"
+  const i2_oriCol =  "#b6b6b6";// original i2 color "lightblue"
   const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
   let bgIndex = 0;
 
@@ -56,14 +56,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (currTime >= 9 && currTime < 27) {
       i2_section.style.backgroundColor = "#f4e190"; // yellow
-    } else if (currTime >= 33 && currTime < 57) {
+    } 
+    else if (currTime >= 33 && currTime < 57) {
       i2_section.style.backgroundColor = "#f6ecfo"; // white
       
-    }else if (currTime >= 62 && currTime < 82) {
+    }
+    else if (currTime >= 62 && currTime < 82) {
       i2_section.style.backgroundColor = "#bbd19e"; // green
     } 
     else if (currTime >= 88 && currTime < 114) {
-      i2_section.style.backgroundColor = "#7f904d"; // blue
+      i2_section.style.backgroundColor = "#7f90cd"; // blue
 
     }
     else if (currTime >= 120 && currTime < 152) {
