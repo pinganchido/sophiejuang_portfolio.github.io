@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const glight_video = document.getElementById("glight_video");
   const wrapper = document.querySelector(".wrapper");
 
-  const i2_oriCol = ; "b6b6b6";// original i2 color "lightblue"
+  const i2_oriCol =  "b6b6b6";// original i2 color "lightblue"
   const bgColors = ["#f0f8ff", "#ffcccb", "#d1e7dd", "#fff3cd", "#dbeafe"];
   let bgIndex = 0;
 
