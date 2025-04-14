@@ -54,19 +54,19 @@ document.addEventListener("DOMContentLoaded", function () {
   glight_video.addEventListener("timeupdate", () => {
     const currTime = glight_video.currentTime;
 
-    if (currTime >= 0 && currTime < 9) {
+    if (currTime >= 9 && currTime < 27) {
       i2_section.style.backgroundColor = "#f4e190"; // yellow
-    } else if (currTime >= 0 && currTime < 9) {
+    } else if (currTime >= 33 && currTime < 57) {
       i2_section.style.backgroundColor = "#f6ecfo"; // white
       
-    }else if (currTime >= 0 && currTime < 9) {
+    }else if (currTime >= 62 && currTime < 82) {
       i2_section.style.backgroundColor = "#bbd19e"; // green
     } 
-    else if (currTime >= 0 && currTime < 9) {
+    else if (currTime >= 88 && currTime < 114) {
       i2_section.style.backgroundColor = "#7f904d"; // blue
 
     }
-    else if (currTime >= 0 && currTime < 9) {
+    else if (currTime >= 120 && currTime < 152) {
       i2_section.style.backgroundColor = "#e89696"; // red
 
     }
