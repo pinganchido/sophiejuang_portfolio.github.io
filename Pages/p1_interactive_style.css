@@ -221,6 +221,10 @@ body, html {
   margin-bottom: 20px;
 }
 
+.journey_sketch
+{
+	border: 1px solid red;
+}
 
 
 .Journey_video_layout {
