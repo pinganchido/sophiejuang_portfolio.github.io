@@ -37,6 +37,7 @@ filer.forEach((f) => {
 
 document.addEventListener("DOMContentLoaded", function () {
   const i2_section = document.getElementById("i2");
+  const i1_section = document.getElementById("i1");
   const glight_video = document.getElementById("glight_video");
   const wrapper = document.querySelector(".wrapper");
 
@@ -94,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       document.body.style.backgroundColor = "#F0FFF0";
       i2_section.style.backgroundColor = "#F0FFF0";
+      i1_section.style.backgroundColor = "#F0FFF0";
       //wrapper.style.backgroundColor = "#F0FFF0";
     }
   });
