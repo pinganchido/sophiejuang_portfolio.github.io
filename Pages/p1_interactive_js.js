@@ -117,7 +117,7 @@ function setup() {
 }
 
 function draw() {
- //clear(); // translucent white for trailing effect
+ clear(); // translucent white for trailing effect
 
   for (let i = leaves.length - 1; i >= 0; i--) {
     leaves[i].update();
