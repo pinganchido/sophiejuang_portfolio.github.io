@@ -112,7 +112,7 @@ function setup() {
   canvas.style('position', 'absolute');
   canvas.style('top', '0');
   canvas.style('left', '0');
-  canvas.style('z-index', '-1'); // Optional: put behind text
+  canvas.style('z-index', '10'); // Optional: put behind text
   clear(); // ensure it's transparent
 }
 
