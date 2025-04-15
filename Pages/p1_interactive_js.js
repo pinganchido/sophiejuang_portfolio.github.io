@@ -86,14 +86,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (scrollY >= i3) {
       document.body.style.backgroundColor = "lightcoral";
-      wrapper.style.backgroundColor = "lightcoral";
+      //wrapper.style.backgroundColor = "lightcoral";
     } else if (scrollY >= i2) {
       //document.body.style.backgroundColor = i2_oriCol;
-      wrapper.style.backgroundColor = i2_oriCol;
+      //wrapper.style.backgroundColor = i2_oriCol;
       i2_section.style.backgroundColor = i2_oriCol; 
     } else {
       document.body.style.backgroundColor = "#F0FFF0";
-      wrapper.style.backgroundColor = "#F0FFF0";
+      i2_section.style.backgroundColor = "#F0FFF0";
+      //wrapper.style.backgroundColor = "#F0FFF0";
     }
   });
 });
