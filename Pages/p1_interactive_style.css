@@ -100,7 +100,7 @@ body {
 
 /* Page structure */
 .wrapper {
-  background-color: #FFFFF4;
+/*  background-color: #FFFFF4;
   padding-left: 20px;
   text-align: center;
   transition: background-color 0.5s ease; 
@@ -110,7 +110,15 @@ body {
   place-items: center;
   margin: 0;
   padding: 0;
+  width: 100vw;*/
+
+  background-color: #FFFFF4;
+  text-align: center;
+  transition: background-color 0.5s ease; 
+
   width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
 #i2{
@@ -169,6 +177,17 @@ body, html {
 
    
 
+}
+
+.full_section {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 .introduce {
    max-width: 800px;         /* Set the max width of the paragraph */
