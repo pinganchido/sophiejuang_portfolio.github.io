@@ -129,9 +129,11 @@ function draw() {
 }
 
 function mousePressed() {
-  for (let i = 0; i < 5; i++) {
+
+    let num = round(random(1, 5));
+  for (let i = 0; i < num; i++) {
     //leaves.push(new Leaf(mouseX, mouseY));
-    leaves.push(new Leaf(-5, -5));
+    leaves.push(new Leaf(-5, -5));//init position x, y
   }
 }
 
@@ -160,10 +162,10 @@ class Leaf {
       color(115, 102, 89)
     ];
     this.pos = createVector(x, y);
-    this.vel = createVector(random(1, 2), random(0.1, 0.25));//accerlation
+    this.vel = createVector(random(section.offsetWidth / 1000, section.offsetWidth / 1000 + 2), random(section.offsetHeight / 1000, section.offsetHeight / 1000 + 1));//accerlation
     //this.angle = random(TWO_PI);
     this.rotation = random(-180, 180);
-    this.rotateAngle = random(-10, 10);
+    this.rotateAngle = random(-5, 5);
     this.leaveColor = random(leaveColors);
     this.stemColor = random(stemColors);
     
