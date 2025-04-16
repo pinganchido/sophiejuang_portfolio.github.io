@@ -163,7 +163,7 @@ class Leaf {
     this.vel = createVector(random(0.1, 0.2), random(0.02, 0.05));//accerlation
     //this.angle = random(TWO_PI);
     this.rotation = random(-180, 180);
-
+    this.rotateAngle = random(-10, 10);
     this.leaveColor = random(leaveColors);
     this.stemColor = random(stemColors);
     
@@ -171,7 +171,7 @@ class Leaf {
 
   update() {
     this.pos.add(this.vel);
-    this.rotation += this.rotation;
+    this.rotation += this.rotateAngle;
   }
 
   show() {
