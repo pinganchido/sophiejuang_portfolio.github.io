@@ -130,8 +130,8 @@ function draw() {
 
 function mousePressed() {
   for (let i = 0; i < 5; i++) {
-    leaves.push(new Leaf(mouseX, mouseY));
-    //leaves.push(new Leaf(-5, -5));
+    //leaves.push(new Leaf(mouseX, mouseY));
+    leaves.push(new Leaf(-5, -5));
   }
 }
 
