@@ -107,7 +107,7 @@ let leaves = [];
 function setup() {
   //let canvas = createCanvas(windowWidth, windowHeight);
   const section = document.getElementById('i1');
-  let canvas = createCanvas(section.offsetWidth, section.offsetHeight);
+  let canvas = createCanvas(section.offsetWidth, section.offsetHeight, WEBGL);
   canvas.parent('sketch-holder');
   canvas.style('position', 'absolute');
   canvas.style('top', '0');
@@ -141,6 +141,8 @@ class Leaf {
     
 
   constructor(x, y) {
+      const section = document.getElementById('i1');
+
      const leaveColors = [
       color(228, 137, 134),
       color(227, 147, 125),
@@ -161,11 +163,25 @@ class Leaf {
       color(238, 232, 227),
       color(115, 102, 89)
     ];
-    this.pos = createVector(x, y);
-    this.vel = createVector(random(section.offsetWidth / 1000, section.offsetWidth / 1000 + 2), random(section.offsetHeight / 1000, section.offsetHeight / 1000 + 1));//accerlation
-    //this.angle = random(TWO_PI);
-    this.rotation = random(-180, 180);
-    this.rotateAngle = random(-5, 5);
+    this.pos = createVector(random(-50, 0), random(-100, 0), random(-50, 50));
+    this.vel = createVector(
+      random(0.5, 1.5),   // Rightward wind
+      random(1.5, 2.5),   // Falling speed
+      random(-0.5, 0.5)   // Slight Z-axis drift
+    );
+
+    this.rotation = createVector(
+      random(-PI, PI),
+      random(-PI, PI),
+      random(-PI, PI)
+    );
+
+    this.rotationSpeed = createVector(
+      random(-0.05, 0.05),
+      random(-0.05, 0.05),
+      random(-0.05, 0.05)
+    );
+
     this.leaveColor = random(leaveColors);
     this.stemColor = random(stemColors);
     
@@ -173,7 +189,7 @@ class Leaf {
 
   update() {
     this.pos.add(this.vel);
-    this.rotation += this.rotateAngle;
+    this.rotation.add(this.rotationSpeed);
   }
 
   show() {
@@ -194,7 +210,7 @@ class Leaf {
   drawStem(){
       fill(this.stemColor)
       rotate(PI / 180 * 20);
-      arc(0, 0, 1.2, 60, PI / 10, PI / 2);
+      arc(0, 0, 1.4, 60, PI / 10, PI / 2);
            
   }
 
