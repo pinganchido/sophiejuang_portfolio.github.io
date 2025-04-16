@@ -142,6 +142,8 @@ class Leaf {
 
   constructor(x, y) {
       const section = document.getElementById('i1');
+    let sizeX = random(40, 45);
+    let sizeY = random(25, 35);
 
      const leaveColors = [
       color(228, 137, 134),
@@ -195,14 +197,15 @@ class Leaf {
   show() {
     push();
 
-    let sizeX = random(40, 42);
-    let sizeY = random(25, 30); 
+    
    
     noStroke();
     fill(this.leaveColor);   
     translate(this.pos.x, this.pos.y);
-    rotate(PI/180 * this.rotation);
-    ellipse(0, 0, sizeY, sizeX);
+    rotateX(this.rotation.x);
+    rotateY(this.rotation.y);
+    rotateZ(this.rotation.z);
+    ellipse(0, 0, this.sizeY, this.sizeX);
     this.drawStem();
     pop();
   }
