@@ -142,8 +142,8 @@ class Leaf {
 
   constructor(x, y) {
       const section = document.getElementById('i1');
-    let sizeX = random(40, 45);
-    let sizeY = random(25, 35);
+   this.sizeX = random(40, 45);
+   this.sizeY = random(25, 35);
 
      const leaveColors = [
       color(228, 137, 134),
