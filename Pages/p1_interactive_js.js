@@ -136,7 +136,10 @@ function mousePressed() {
 }
 
 class Leaf {
-    let leaveColors = [
+    
+
+  constructor(x, y) {
+     const leaveColors = [
       color(228, 137, 134),
       color(227, 147, 125),
       color(232, 175, 125),
@@ -151,26 +154,24 @@ class Leaf {
       color(209, 184, 203),
       color(223, 154, 154)
     ];
-    let stemColors = [
+    const stemColors = [
       color(199, 184, 169),
       color(238, 232, 227),
       color(115, 102, 89)
     ];
-
-  constructor(x, y) {
     this.pos = createVector(x, y);
     this.vel = createVector(random(0.1, 0.2), random(0.02, 0.05));//accerlation
-    this.angle = random(TWO_PI);
+    //this.angle = random(TWO_PI);
     this.rotation = random(-180, 180);
 
-    this.stemColor = leaveColors[random(0, 12)];
-    this.stemColor = stemColors[random(0, 2)];
+    this.stemColor = random(leaveColors);
+    this.stemColor = random(stemColors);
     
   }
 
   update() {
     this.pos.add(this.vel);
-    this.angle += this.rotation;
+    this.rotation += this.rotation;
   }
 
   show() {
@@ -180,17 +181,17 @@ class Leaf {
     let sizeY = random(25, 35); 
    
     
-    fill(c); // brown
+    fill(this.stemColor); 
     noStroke(); 
     translate(this.pos.x, this.pos.y);
-    rotate(PI/180 * rotation);
-    ellipse(0, 0, sizeY, sizeX);
-    drawStem();
+    rotate(PI/180 * this.rotation);
+    ellipse(0, 0, this.sizeY, this.sizeX);
+    this.drawStem();
     pop();
   }
 
   drawStem(){
-      fill(stemColor)
+      fill(this.stemColor)
       rotate(PI / 180 * 20);
       arc(0, 0, stem, 60, PI / 10, PI / 2);
            
