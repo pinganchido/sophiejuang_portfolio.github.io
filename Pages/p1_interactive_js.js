@@ -130,8 +130,8 @@ function draw() {
 
 function mousePressed() {
   for (let i = 0; i < 5; i++) {
-    //leaves.push(new Leaf(mouseX, mouseY));
-    leaves.push(new Leaf(-5, -5));
+    leaves.push(new Leaf(mouseX, mouseY));
+    //leaves.push(new Leaf(-5, -5));
   }
 }
 
@@ -164,7 +164,7 @@ class Leaf {
     //this.angle = random(TWO_PI);
     this.rotation = random(-180, 180);
 
-    this.stemColor = random(leaveColors);
+    this.leaveColor = random(leaveColors);
     this.stemColor = random(stemColors);
     
   }
@@ -180,12 +180,11 @@ class Leaf {
     let sizeX = random(40, 45);
     let sizeY = random(25, 35); 
    
-    
-    fill(this.stemColor); 
-    noStroke(); 
+    noStroke();
+    fill(this.leaveColor);   
     translate(this.pos.x, this.pos.y);
     rotate(PI/180 * this.rotation);
-    ellipse(0, 0, this.sizeY, this.sizeX);
+    ellipse(0, 0, sizeY, sizeX);
     this.drawStem();
     pop();
   }
