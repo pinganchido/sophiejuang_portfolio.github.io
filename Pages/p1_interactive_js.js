@@ -123,24 +123,49 @@ function draw() {
     leaves[i].update();
     leaves[i].show();
     if (leaves[i].offScreen()) {
-      leaves.splice(i, 1);
+      leaves.splice(i, 1);//delete from index i from leaves/ 1: delet one element 
     }
   }
 }
 
 function mousePressed() {
   for (let i = 0; i < 5; i++) {
-    leaves.push(new Leaf(mouseX, mouseY));
+    //leaves.push(new Leaf(mouseX, mouseY));
+    leaves.push(new Leaf(-5, -5));
   }
 }
 
 class Leaf {
+    let leaveColors = [
+      color(228, 137, 134),
+      color(227, 147, 125),
+      color(232, 175, 125),
+      color(238, 196, 135),
+      color(236, 221,147),
+      color(215, 221, 131),
+      color(171, 192, 145),
+      color(151, 190, 168),
+      color(188, 219, 225),
+      color(163, 168, 215),
+      color(216, 205, 234),
+      color(209, 184, 203),
+      color(223, 154, 154)
+    ];
+    let stemColors = [
+      color(199, 184, 169),
+      color(238, 232, 227),
+      color(115, 102, 89)
+    ];
+
   constructor(x, y) {
     this.pos = createVector(x, y);
-    this.vel = createVector(random(-1, 1), random(1, 3));
+    this.vel = createVector(random(0.1, 0.2), random(0.02, 0.05));//accerlation
     this.angle = random(TWO_PI);
-    this.rotation = random(-0.05, 0.05);
-    this.size = random(20, 40);
+    this.rotation = random(-180, 180);
+
+    this.stemColor = leaveColors[random(0, 12)];
+    this.stemColor = stemColors[random(0, 2)];
+    
   }
 
   update() {
@@ -150,13 +175,25 @@ class Leaf {
 
   show() {
     push();
+
+    let sizeX = random(40, 45);
+    let sizeY = random(25, 35); 
+   
+    
+    fill(c); // brown
+    noStroke(); 
     translate(this.pos.x, this.pos.y);
-    rotate(this.angle);
-    // Draw a simple leaf shape (you can replace with image)
-    fill(139, 69, 19); // brown
-    noStroke();
-    ellipse(0, 0, this.size, this.size / 2);
+    rotate(PI/180 * rotation);
+    ellipse(0, 0, sizeY, sizeX);
+    drawStem();
     pop();
+  }
+
+  drawStem(){
+      fill(stemColor)
+      rotate(PI / 180 * 20);
+      arc(0, 0, stem, 60, PI / 10, PI / 2);
+           
   }
 
   offScreen() {
