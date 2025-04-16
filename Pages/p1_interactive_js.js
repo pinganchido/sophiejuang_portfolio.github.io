@@ -193,7 +193,7 @@ class Leaf {
   drawStem(){
       fill(this.stemColor)
       rotate(PI / 180 * 20);
-      arc(0, 0, stem, 60, PI / 10, PI / 2);
+      arc(0, 0, 1.2, 60, PI / 10, PI / 2);
            
   }
 
