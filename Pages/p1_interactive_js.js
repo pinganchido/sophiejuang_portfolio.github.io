@@ -130,7 +130,7 @@ function draw() {
 
 function mousePressed() {
 
-    let num = round(random(1, 5));
+    let num = round(random(1, 4));
   for (let i = 0; i < num; i++) {
     //leaves.push(new Leaf(mouseX, mouseY));
     leaves.push(new Leaf(-5, -5));//init position x, y
@@ -141,7 +141,7 @@ class Leaf {
     
 
   constructor(x, y) {
-      const section = document.getElementById('i1');
+   const section = document.getElementById('i1');
    this.sizeX = random(40, 45);
    this.sizeY = random(25, 35);
 
@@ -165,7 +165,8 @@ class Leaf {
       color(238, 232, 227),
       color(115, 102, 89)
     ];
-    this.pos = createVector(random(-50, 0), random(-100, 0), random(-50, 50));
+    this.pos = createVector(random(-section.offsetWidth /2 - 50, section.offsetWidth / 2 -10), 
+                            random(-section.offsetHeight /2 - 50, -section.offsetHeight /2 - 10), random(-50, 50));
     this.vel = createVector(
       random(0.5, 1.5),   // Rightward wind
       random(1.5, 2.5),   // Falling speed

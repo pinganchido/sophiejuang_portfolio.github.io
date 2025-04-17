@@ -48,7 +48,7 @@ to this section's matching END comment to see page-specific styles.
 .titleArea{
   
   background-color: #FFFFF0;
-  width: 100%;
+  width: 100vw;
   display: grid;
   place-items: center;
   padding: 0px;
@@ -120,7 +120,9 @@ body {
   margin: 0;
   padding: 0;
 }
-
+#i1{
+	 position:relative;
+}
 #i2{
 	 background-color: #FFFFF4;
 	 transition: background-color 0.5s ease; 
@@ -186,7 +188,7 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  /*padding: 40px 20px;*/
   box-sizing: border-box;
 }
 .introduce {
