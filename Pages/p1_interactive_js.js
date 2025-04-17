@@ -168,7 +168,7 @@ class Leaf {
     this.pos = createVector(random(-section.offsetWidth /2 - 50, -section.offsetWidth / 2 -10), 
                             random(-section.offsetHeight /2 - 50, -section.offsetHeight /2 - 10), random(-50, 50));
     this.vel = createVector(
-      random(0.8, 2),   // Rightward wind
+      random(0.8, 2.5),   // Rightward wind
       random(1.5, 2.5),   // Falling speed
       random(-0.5, 0.5)   // Slight Z-axis drift
     );
@@ -205,7 +205,7 @@ class Leaf {
    
     noStroke();
     //fill(this.leaveColor);   
-    fill(red(this.leaveColor), green(this.leaveColor), blue(this.leaveColor), 220);   
+    fill(red(this.leaveColor), green(this.leaveColor), blue(this.leaveColor), 225);   
     translate(this.pos.x, this.pos.y);
     rotateX(this.rotation.x);
     rotateY(this.rotation.y);
