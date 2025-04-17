@@ -99,8 +99,8 @@ body {
 }
 
 /* Page structure */
-.wrapper {
-/*  background-color: #FFFFF4;
+/*.wrapper {
+  background-color: #FFFFF4;
   padding-left: 20px;
   text-align: center;
   transition: background-color 0.5s ease; 
@@ -110,7 +110,7 @@ body {
   place-items: center;
   margin: 0;
   padding: 0;
-  width: 100vw;*/
+  width: 100vw;
 
   background-color: #FFFFF4;
   text-align: center;
@@ -119,7 +119,7 @@ body {
   width: 100vw;
   margin: 0;
   padding: 0;
-}
+}*/
 #i1{
 	 position:relative;
 }
