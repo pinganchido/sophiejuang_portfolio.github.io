@@ -209,7 +209,8 @@ class Leaf {
     //ellipse(0, 0, this.sizeY, this.sizeX);
     //plane(this.sizeY, this.sizeX);
     push();
-    scale(this.sizeX / 3, this.sizeY / 3, 1); // scale X and Y based on size
+    let s = random(0.2, 0.5);
+    scale(s, s, s); // scale X and Y based on size
     this.drawLeafShape();
     pop();
 
