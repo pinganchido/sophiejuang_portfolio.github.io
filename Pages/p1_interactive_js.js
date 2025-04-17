@@ -165,7 +165,7 @@ class Leaf {
       color(238, 232, 227),
       color(115, 102, 89)
     ];
-    this.pos = createVector(random(-section.offsetWidth /2 - 50, section.offsetWidth / 2 -10), 
+    this.pos = createVector(random(-section.offsetWidth /2 - 50, -section.offsetWidth / 2 -10), 
                             random(-section.offsetHeight /2 - 50, -section.offsetHeight /2 - 10), random(-50, 50));
     this.vel = createVector(
       random(0.5, 1.5),   // Rightward wind
