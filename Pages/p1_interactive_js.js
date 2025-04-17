@@ -228,7 +228,7 @@ class Leaf {
   }
   drawLeafShape() {
   beginShape();
-  fill(255); // or any color you want
+ 
   noStroke();
 
   // Start at bottom center
