@@ -209,8 +209,8 @@ class Leaf {
     //ellipse(0, 0, this.sizeY, this.sizeX);
     //plane(this.sizeY, this.sizeX);
     push();
-    this.drawLeafShape();
     scale(this.sizeX / 3, this.sizeY / 3, 1); // scale X and Y based on size
+    this.drawLeafShape();
     pop();
 
     this.drawStem();
