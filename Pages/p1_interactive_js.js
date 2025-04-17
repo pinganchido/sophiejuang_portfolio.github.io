@@ -205,7 +205,8 @@ class Leaf {
     rotateX(this.rotation.x);
     rotateY(this.rotation.y);
     rotateZ(this.rotation.z);
-    ellipse(0, 0, this.sizeY, this.sizeX);
+    //ellipse(0, 0, this.sizeY, this.sizeX);
+    plane(this.sizeY, this.sizeX);
     this.drawStem();
     pop();
   }
