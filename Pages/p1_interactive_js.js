@@ -205,7 +205,7 @@ class Leaf {
    
     noStroke();
     //fill(this.leaveColor);   
-    fill(red(this.leaveColor), green(this.leaveColor), blue(this.leaveColor), 200);   
+    fill(red(this.leaveColor), green(this.leaveColor), blue(this.leaveColor), 220);   
     translate(this.pos.x, this.pos.y);
     rotateX(this.rotation.x);
     rotateY(this.rotation.y);
