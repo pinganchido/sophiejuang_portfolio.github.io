@@ -184,7 +184,10 @@ class Leaf {
       random(-0.05, 0.05),
       random(-0.05, 0.05)
     );
-
+    
+    this.s = random(0.2, 0.5);
+    
+    
     this.leaveColor = random(leaveColors);
     this.stemColor = random(stemColors);
     
@@ -209,8 +212,8 @@ class Leaf {
     //ellipse(0, 0, this.sizeY, this.sizeX);
     //plane(this.sizeY, this.sizeX);
     push();
-    let s = random(0.2, 0.5);
-    scale(s, s, s); // scale X and Y based on size
+    
+    scale(this.s, this.s, this.s); // scale X and Y based on size
     this.drawLeafShape();
     pop();
 
