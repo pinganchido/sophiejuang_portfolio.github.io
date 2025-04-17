@@ -207,10 +207,18 @@ class Leaf {
     rotateY(this.rotation.y);
     rotateZ(this.rotation.z);
     //ellipse(0, 0, this.sizeY, this.sizeX);
-    plane(this.sizeY, this.sizeX);
+    //plane(this.sizeY, this.sizeX);
+    drawLeafShape();
     this.drawStem();
     pop();
+
+ 
+  
+
+
+
   }
+
 
   drawStem(){
       fill(this.stemColor)
@@ -218,6 +226,22 @@ class Leaf {
       arc(0, 0, 1.4, 60, PI / 10, PI / 2);
            
   }
+  function drawLeafShape() {
+  beginShape();
+  fill(255); // or any color you want
+  noStroke();
+
+  // Start at bottom center
+  vertex(0, 0);
+
+  // Left curve
+  bezierVertex(-30, -10, -40, -80, 0, -100);
+
+  // Right curve (mirror of left)
+  bezierVertex(40, -80, 30, -10, 0, 0);
+
+  endShape(CLOSE);
+}
 
   offScreen() {
     return this.pos.y > height;
