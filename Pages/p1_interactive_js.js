@@ -226,7 +226,7 @@ class Leaf {
       arc(0, 0, 1.4, 60, PI / 10, PI / 2);
            
   }
-  function drawLeafShape() {
+  drawLeafShape() {
   beginShape();
   fill(255); // or any color you want
   noStroke();
