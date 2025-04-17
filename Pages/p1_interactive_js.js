@@ -204,7 +204,8 @@ class Leaf {
     
    
     noStroke();
-    fill(this.leaveColor);   
+    //fill(this.leaveColor);   
+    fill(red(this.leaveColor), green(this.leaveColor), blue(this.leaveColor), 200);   
     translate(this.pos.x, this.pos.y);
     rotateX(this.rotation.x);
     rotateY(this.rotation.y);
@@ -215,9 +216,10 @@ class Leaf {
     
     scale(this.s, this.s, this.s); // scale X and Y based on size
     this.drawLeafShape();
+    this.drawStem();
     pop();
 
-    this.drawStem();
+    
     pop();
 
  
