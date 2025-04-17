@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (scrollY >= i3) {
       document.body.style.backgroundColor = "lightcoral";
       //wrapper.style.backgroundColor = "lightcoral";
-    } else if (scrollY >= i2) {
+    } else if (scrollY >= i2 - 10) {
       //document.body.style.backgroundColor = i2_oriCol;
       //wrapper.style.backgroundColor = i2_oriCol;
       i2_section.style.backgroundColor = i2_oriCol; 
