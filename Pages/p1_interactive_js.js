@@ -168,7 +168,7 @@ class Leaf {
     this.pos = createVector(random(-section.offsetWidth /2 - 50, -section.offsetWidth / 2 -10), 
                             random(-section.offsetHeight /2 - 50, -section.offsetHeight /2 - 10), random(-50, 50));
     this.vel = createVector(
-      random(0.5, 1.5),   // Rightward wind
+      random(0.8, 2),   // Rightward wind
       random(1.5, 2.5),   // Falling speed
       random(-0.5, 0.5)   // Slight Z-axis drift
     );
@@ -208,7 +208,11 @@ class Leaf {
     rotateZ(this.rotation.z);
     //ellipse(0, 0, this.sizeY, this.sizeX);
     //plane(this.sizeY, this.sizeX);
+    push();
     this.drawLeafShape();
+    scale(this.sizeX / 3, this.sizeY / 3, 1); // scale X and Y based on size
+    pop();
+
     this.drawStem();
     pop();
 
