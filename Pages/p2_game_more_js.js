@@ -1,0 +1,3 @@
+/*
+  More Game Projects page JavaScript
+*/

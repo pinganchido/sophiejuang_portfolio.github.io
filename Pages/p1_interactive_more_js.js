@@ -1,0 +1,3 @@
+/*
+  More Interactive Projects page JavaScript
+*/
