@@ -43,6 +43,9 @@ const MENU_LIGHT_IMG = "sources/light.png?v=2";
 // anim: image sequence inside the circle: shows the first frame, loops while hovered
 //   folder: where the frames are, named 0001.webp, 0002.webp, ... (see MENU_ANIM_* below)
 //   count: number of frames (0 = no animation), fps: playback speed
+//   x, y: move the picture inside the circle, in pixels of the original frame (800x600)
+//         x > 0 = right, y > 0 = down
+//   zoom: 1 = the circle shows the middle 600x600 of the frame, 1.2 = 20% bigger, 0.8 = smaller
 // cue: when this button's animation reaches cue.frame (counted from 0), the buttons with
 //   cueCurve start playing their animations and draw a looping curve out of their side
 //   (1 = out of the right side, -1 = out of the left side). The curves are pulled back
@@ -55,21 +58,21 @@ const MENU_ITEMS = [
     href: "Pages/p1_interactive_p.html",
     offsetY: 0.5,
     effect: "dandelion",
-    anim: { folder: "sources/anim/p1/", count: 46, fps: 60 },
+    anim: { folder: "sources/anim/p1/", count: 46, fps: 60, x: 0, y: 0, zoom: 1 },
     cueCurve: 1,
   },
   {
     label: "Professional Projects",
     href: "Pages/p6_professional_Projects_p.html",
     offsetY: 0,
-    anim: { folder: "sources/anim/p6/", count: 66, fps: 60 },
+    anim: { folder: "sources/anim/p6/", count: 66, fps: 60, x: 0, y: 20, zoom: 1 },
     cue: { frame: 44 },
   },
   {
     label: "Game Projects",
     href: "Pages/p2_game_p.html",
     offsetY: 0.5,
-    anim: { folder: "sources/anim/p2/", count: 137, fps: 60 },
+    anim: { folder: "sources/anim/p2/", count: 137, fps: 60, x: -10, y: 0, zoom: 1 },
     cueCurve: -1,
     squeeze: true,
   },
@@ -93,6 +96,8 @@ const CUE_SPACING = 0.006; // distance between the dots that make up the line (r
 
 const MENU_MOBILE_WIDTH = 600; // stack buttons vertically below this width
 const MENU_MAX_SIZE = 440; // max circle diameter at scale 1 (px)
+const MENU_MIN_SIZE = 160; // never shrink below this to fit a short window
+const MENU_FIT_MARGIN = 16; // space kept below the labels when fitting the window height
 const MENU_SIZE_RATIO = 1.1; // circle size relative to its cell width (row layout)
 const MENU_SIZE_RATIO_MOBILE = 0.95; // circle size relative to screen width (stacked layout)
 const MENU_MASK_RATIO = 0.92; // mask circle size relative to the image (trims rough edges)
@@ -211,6 +216,11 @@ function setup() {
   }).observe(holder);
 }
 
+// Window height changes also matter (circles are sized to fit the window)
+function windowResized() {
+  layoutMenu();
+}
+
 // Size the canvas and place the buttons in a row (or a column on mobile).
 // Each cell reserves room for the biggest circle plus drift, so the label is never covered.
 function layoutMenu() {
@@ -221,7 +231,15 @@ function layoutMenu() {
   const cellW = w / cols;
   const maxScale = max(MENU_HOVER_SCALE, MENU_IDLE_SCALE_MAX);
   const ratio = stacked ? MENU_SIZE_RATIO_MOBILE : MENU_SIZE_RATIO;
-  const size = min(((cellW - MENU_DRIFT * 2) / maxScale) * ratio, MENU_MAX_SIZE);
+  let size = min(((cellW - MENU_DRIFT * 2) / maxScale) * ratio, MENU_MAX_SIZE);
+  if (!stacked) {
+    // Also fit the window height, so all three circles and their labels are visible without scrolling
+    const contentTop = holder.parentElement.getBoundingClientRect().top + window.scrollY;
+    const maxOffsetRatio = max(menuButtons.map((b) => b.offsetY || 0));
+    const fixedH = MENU_DRIFT * 2 + MENU_LABEL_GAP + MENU_LABEL_HEIGHT + MENU_FIT_MARGIN;
+    const fitSize = (window.innerHeight - contentTop - fixedH) / (maxScale + maxOffsetRatio);
+    size = min(size, max(fitSize, MENU_MIN_SIZE));
+  }
   const circleAreaH = size * maxScale + MENU_DRIFT * 2;
   const cellH = circleAreaH + MENU_LABEL_GAP + MENU_LABEL_HEIGHT;
   const glowPad = size * maxScale * MENU_GLOW_PAD; // keeps the glow from being cut off
@@ -229,9 +247,10 @@ function layoutMenu() {
   const offsets = menuButtons.map((b) => (stacked ? 0 : b.offsetY * size));
   const maxOffset = max(offsets);
 
-  // Glow space above and below. The bottom space is pulled back with a negative margin,
-  // so the glow can spill over the footer without adding empty space to the page.
+  // Glow space above and below, pulled back with negative margins so the glow can spill
+  // behind the title and over the footer without adding empty space to the page.
   resizeCanvas(w, (stacked ? cellH * menuButtons.length : cellH + maxOffset) + glowPad * 2);
+  holder.style.marginTop = `${-glowPad}px`;
   holder.style.marginBottom = `${-glowPad}px`;
 
   menuButtons.forEach((b, i) => {
@@ -336,21 +355,26 @@ function drawMenuButton(b) {
 
   // Image sequence on top of the light, inside the same circular mask
   const frame = getAnimFrame(b);
-  if (frame) drawInCircle(frame, b.x, b.y, d, r, 1);
+  if (frame) drawInCircle(frame, b.x, b.y, d, r, 1, b.anim);
 }
 
 // Draw an image as a centered square crop, clipped to a circle (the circular mask)
-function drawInCircle(img, x, y, d, r, alpha) {
+// view (optional): { x, y, zoom } to move / scale the picture inside the circle (see "anim" above)
+function drawInCircle(img, x, y, d, r, alpha, view) {
   const ctx = drawingContext;
   const w = img.naturalWidth;
   const h = img.naturalHeight;
-  const side = min(w, h);
+  const zoom = (view && view.zoom) || 1;
+  const side = min(w, h) / zoom;
+  const offX = (view && view.x) || 0;
+  const offY = (view && view.y) || 0;
   ctx.save();
   ctx.globalAlpha = alpha;
   ctx.beginPath();
   ctx.arc(x, y, r, 0, TWO_PI);
   ctx.clip();
-  ctx.drawImage(img, (w - side) / 2, (h - side) / 2, side, side, x - d / 2, y - d / 2, d, d);
+  // Taking the crop from further left makes the picture move right, and vice versa
+  ctx.drawImage(img, (w - side) / 2 - offX, (h - side) / 2 - offY, side, side, x - d / 2, y - d / 2, d, d);
   ctx.restore();
 }
 

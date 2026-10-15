@@ -365,7 +365,13 @@ h2 {
 .wrapper {
   grid-template-columns: minmax(0, 1fr);
   min-height: 0; /* no extra empty space under the buttons */
+  padding-top: 0;
   padding-bottom: 0;
+}
+/* Keep the title / nav above the menu canvas (its glow area reaches up behind them) */
+.titleArea {
+  position: relative;
+  z-index: 1;
 }
 /* Full-screen dandelion canvas behind all page content (dandelion.js) */
 #dandelion-bg {
