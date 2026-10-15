@@ -10,6 +10,9 @@
   separate from the menu sketch in script.js.
   dandelionBg.setEmitter(x, y, radius) - circle position in viewport pixels
   dandelionBg.setActive(true / false)  - start / stop emitting
+  dandelionBg.setGatherer(x, y, r, vx, vy, gathering, visible)
+    - the draggable small light ball: while gathering (dragged), nearby dandelions stick to it
+      as a dandelion puff; when let go, they are released one by one along its way
 */
 const dandelionBg = (() => {
   const STEPS_PER_SECOND = 10; // the original ran ~10 steps/s (delay(100)); drawing is interpolated
@@ -24,26 +27,43 @@ const dandelionBg = (() => {
   const OUT_SPEED_MAX = 4;
   const OUT_PUSH = 0.3; // outward push during the first steps, to get out from behind the circle
   const OUT_PUSH_STEPS = 15;
+  const EMIT_RIGHT_BIAS = 0.6; // share of dandelions that come out of the right half (0.5 = even all around)
+  const WIND_RIGHT = 0.25; // rightward breeze per step while the circle is producing dandelions
   const MAX_SPEED = 3; // drift speed after leaving the circle (px/step) so they float gently in the background
   const SLOW_DOWN = 0.9; // how quickly they slow down to MAX_SPEED
   const OFFSCREEN_MARGIN = 60; // removed once this far outside the screen
   const FADE_STEP = 0.05; // fade-out speed when there are too many
 
+  // Gathering by the draggable small light ball
+  const GATHER_RADIUS = 110; // dandelions closer than this (px) get caught while dragging
+  const GATHER_MAX = 120; // max dandelions in the puff
+  const GATHER_DIST_MIN = 0.6; // how far from the center they sit, relative to the small ball radius
+  const GATHER_DIST_MAX = 1.1; //   (their seeds stick out ~25px further, forming the puff)
+  const GATHER_PULL = 0.18; // how fast caught ones fly in (per frame, 0 ~ 1)
+  const RELEASE_TIME = 1.0; // seconds over which they are released after letting go (most go early, along the way)
+  const RELEASE_SPEED = 2.5; // outward speed when released (px/step)
+
   // Dandelion shape
-  const D_SCALE = 1.2;
+  const D_SCALE = 1.1;
   const STEM = 1.2;
   const CIRCLE_D = 2.4;
+  // Colors sampled from light.png (center -> edge), so the dandelions match the light circles
+  const STEM_COLOR = [255, 244, 219];
   const COLORS = [
-    [138, 244, 255], // blue
-    [255, 252, 138], // yellow
-    [255, 102, 102], // red
-    [162, 230, 164], // green
-    [250, 197, 250], // purple
+    [255, 244, 219], // center
+    [254, 237, 197],
+    [253, 234, 192],
+    [251, 228, 176], // edge
+    [246, 214, 150], // a bit deeper, for contrast
   ];
+  // Original colorful version:
+  // [138, 244, 255] blue, [255, 252, 138] yellow, [255, 102, 102] red,
+  // [162, 230, 164] green, [250, 197, 250] purple
 
   let active = false;
   let instance = null;
   const emitter = { x: 0, y: 0, r: 0 };
+  const gatherer = { x: 0, y: 0, r: 0, vx: 0, vy: 0, gathering: false, visible: false };
 
   const sketch = (p) => {
     let particles = [];
@@ -63,6 +83,9 @@ const dandelionBg = (() => {
       constructor() {
         // Start inside the circle at a random angle, moving outward
         this.dir = p5.Vector.random2D();
+        // lean toward the right
+        if (p.random() < EMIT_RIGHT_BIAS) this.dir.x = Math.abs(this.dir.x);
+        else this.dir.x = -Math.abs(this.dir.x);
         this.position = p
           .createVector(emitter.x, emitter.y)
           .add(p5.Vector.mult(this.dir, emitter.r * EMIT_RADIUS));
@@ -81,6 +104,8 @@ const dandelionBg = (() => {
         this.addScale = 0;
         this.scaleStep = 0;
         this.setScale();
+        this.held = false; // stuck to the small light ball
+        this.releaseAt = 0; // when it will be let go (ms), 0 = not scheduled
       }
 
       setScale() {
@@ -89,7 +114,7 @@ const dandelionBg = (() => {
         this.scaleStep = (this.scale - this.addScale) / 30;
       }
 
-      update(wind) {
+      update(wind, breeze) {
         // Size breathing
         if (this.scale > 0) {
           this.addScale += this.scaleStep;
@@ -108,6 +133,7 @@ const dandelionBg = (() => {
         const acc = p.createVector(p.random(-0.8, 0.8), p.random(-0.8, 0.8));
         if (this.age < OUT_PUSH_STEPS) acc.add(p5.Vector.mult(this.dir, OUT_PUSH));
         if (wind) acc.y = p.random(-0.8, -0.5);
+        if (breeze) acc.x += WIND_RIGHT;
 
         this.prevPosition.set(this.position);
         this.prevRotation = this.rotation;
@@ -140,7 +166,7 @@ const dandelionBg = (() => {
         p.rotate(p.radians(rot));
         p.scale(D_SCALE + this.addScale);
         for (let i = 1; i <= this.lineNum; i++) {
-          p.fill(255, a);
+          p.fill(...STEM_COLOR, a);
           p.rotate(p.radians(20));
           if (i <= Math.floor(this.lineNum / 2)) {
             p.arc(0, 0, STEM, 40, p.PI / 10, p.PI / 2);
@@ -167,7 +193,7 @@ const dandelionBg = (() => {
       // Too many: let the oldest ones fade out
       const extra = particles.filter((pt) => !pt.fading).length - MAX_PARTICLES;
       for (let i = 0, n = 0; n < extra && i < particles.length; i++) {
-        if (!particles[i].fading) {
+        if (!particles[i].fading && !particles[i].held) {
           particles[i].fading = true;
           n++;
         }
@@ -175,8 +201,57 @@ const dandelionBg = (() => {
 
       for (let i = particles.length - 1; i >= 0; i--) {
         const pt = particles[i];
-        pt.update(wind);
+        if (pt.held) continue; // moved every frame in updateHeld()
+        pt.update(wind, active);
         if (pt.isDead()) particles.splice(i, 1);
+      }
+    }
+
+    // Catch nearby dandelions while the small ball is dragged, keep held ones on it,
+    // and let them go one by one after it is released. Runs every frame (smooth while dragging).
+    function updateHeld() {
+      const now = p.millis();
+      let heldCount = particles.filter((pt) => pt.held).length;
+
+      if (gatherer.gathering) {
+        for (const pt of particles) {
+          if (heldCount >= GATHER_MAX) break;
+          if (pt.held || pt.fading) continue;
+          if (p.dist(pt.position.x, pt.position.y, gatherer.x, gatherer.y) > GATHER_RADIUS) continue;
+          // Stick to the ball: seed end pointing outward, like a dandelion puff
+          const ang = p.random(p.TWO_PI);
+          pt.held = true;
+          pt.releaseAt = 0;
+          pt.holdAngle = ang;
+          pt.holdDist = gatherer.r * p.random(GATHER_DIST_MIN, GATHER_DIST_MAX);
+          // the fan of stems is drawn from 20deg to lineNum*20deg, the seeds point to +y (90deg)
+          pt.holdRotation = p.degrees(ang) - 90 - 10 * (pt.lineNum + 1);
+          heldCount++;
+        }
+      }
+
+      for (const pt of particles) {
+        if (!pt.held) continue;
+        if (gatherer.gathering) pt.releaseAt = 0; // grabbed again: keep them
+        else if (!pt.releaseAt) pt.releaseAt = now + Math.pow(p.random(), 1.5) * RELEASE_TIME * 1000;
+
+        if (!gatherer.gathering && (now >= pt.releaseAt || !gatherer.visible)) {
+          // Let go: fly outward, carrying a bit of the ball's movement, then drift as usual
+          pt.held = false;
+          const out = p5.Vector.fromAngle(pt.holdAngle).mult(p.random(1, RELEASE_SPEED));
+          pt.velocity.set(out.x + gatherer.vx * 3, out.y + gatherer.vy * 3);
+          pt.age = OUT_PUSH_STEPS; // no outward push from the Interactive circle
+          pt.roA = p.random(-15, 15);
+          continue;
+        }
+
+        const tx = gatherer.x + Math.cos(pt.holdAngle) * pt.holdDist;
+        const ty = gatherer.y + Math.sin(pt.holdAngle) * pt.holdDist;
+        pt.position.x = p.lerp(pt.position.x, tx, GATHER_PULL);
+        pt.position.y = p.lerp(pt.position.y, ty, GATHER_PULL);
+        pt.rotation = p.lerp(pt.rotation, pt.holdRotation, GATHER_PULL);
+        pt.prevPosition.set(pt.position); // no step interpolation while held
+        pt.prevRotation = pt.rotation;
       }
     }
 
@@ -199,6 +274,7 @@ const dandelionBg = (() => {
         steps++;
       }
       if (steps === 5) stepTimer = 0; // tab was in the background: don't catch up
+      updateHeld();
 
       p.clear();
       const t = stepTimer / stepDur;
@@ -216,6 +292,9 @@ const dandelionBg = (() => {
       emitter.x = x;
       emitter.y = y;
       emitter.r = r;
+    },
+    setGatherer(x, y, r, vx, vy, gathering, visible) {
+      Object.assign(gatherer, { x, y, r, vx, vy, gathering, visible });
     },
     setActive(on) {
       if (on === active) return;
