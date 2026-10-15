@@ -15,9 +15,9 @@ to this section's matching END comment to see page-specific styles.
 
 /* Our default values set as CSS variables */
 :root {
-  --color-bg: #FFFFF0;
-  --color-text-main: #4D1F00;
-  --color-text-header: #4D1F00;
+  --color-bg: rgb(66, 61, 50); /* projection wall */
+  --color-text-main: #FFF1D6;
+  --color-text-header: #FFF1D6;
   --color-primary: #fffff0;
   --wrapper-height: 87vh;
   --image-max-width: 300px;
@@ -49,7 +49,7 @@ to this section's matching END comment to see page-specific styles.
 
 .titleArea{
   
-  background-color: #FFFFF0;
+  background-color: transparent; /* let the background dandelions show through */
   width: 100%;
   display: grid;
   place-items: center;
@@ -87,7 +87,7 @@ to this section's matching END comment to see page-specific styles.
   text-decoration: none;
   padding: 0;
   display: block;
-  color: black;
+  color: var(--color-text-main);
   background-color: none;
   border-radius: 5px;
 }
@@ -109,6 +109,7 @@ END Glitch hello-app default styles
 
 body {
   font-family: "Coming Soon";
+  color: var(--color-text-main);
   background-color: var(--color-bg);
   /*background-image: url("https://cdn.glitch.global/3887513c-cf0e-4995-8c2a-2f66f095b4cf/IMG_0307.png?v=1743658390174");*/
   background-size: cover;
@@ -357,4 +358,51 @@ h2 {
 }
 .fileopener:hover {
   border-bottom: 3px solid var(--color-secondary);
+}
+
+/* Home menu buttons drawn by p5.js */
+/* minmax(0, 1fr) keeps the grid column from growing wider than the screen */
+.wrapper {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0; /* no extra empty space under the buttons */
+  padding-bottom: 0;
+}
+/* Full-screen dandelion canvas behind all page content (dandelion.js) */
+#dandelion-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Stretch over the wrapper's 52px side padding so the glow isn't cut off at the sides */
+#menu-canvas {
+  justify-self: stretch;
+  margin-inline: -52px;
+}
+#menu-canvas canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Fallback links: shown only if p5.js fails to load */
+.menu-fallback {
+  list-style: none;
+  padding: 0;
+  font-size: 1.2rem;
+  line-height: 2;
+}
+.menu-fallback a {
+  color: var(--color-text-main);
+}
+
+/* Hidden visually but still reachable by keyboard / screen readers */
+.menu-fallback.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }

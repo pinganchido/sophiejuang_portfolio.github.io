@@ -23,10 +23,16 @@
     <title>Sophie's Portfolio</title>
 
     <!-- The website stylesheet -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=2" />
+
+    <!-- p5.js (draws the home menu buttons) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js" defer></script>
+
+    <!-- Background dandelions (p5.js instance mode) -->
+    <script src="dandelion.js?v=2" defer></script>
 
     <!-- The website JavaScript file -->
-    <script src="script.js" defer></script>
+    <script src="script.js?v=2" defer></script>
   </head>
   <body>
     <!--
@@ -44,43 +50,22 @@
       <ul class="nav">
         <li><a href="index.html">Home|Menu</a></li>
         <li><a href="Pages/p1_interactive_p.html">Interactive</a></li>
+        <li><a href="Pages/p6_professional_Projects_p.html">Professional</a></li>
         <li><a href="Pages/p2_game_p.html">Game</a></li>
         <!--<li><a href="#3d">3D</a></li>-->
         <li><a href="Pages/p0_profile_p.html">About Me|Contact</a></li>
       </ul>
       </div>
        <div class="wrapper">
+      <!-- Menu buttons are drawn by p5.js (see script.js) -->
+      <div id="menu-canvas"></div>
+      <!-- Plain links for keyboard / screen readers; visually hidden once p5.js loads -->
+      <ul id="menu-fallback" class="menu-fallback">
+        <li><a href="Pages/p1_interactive_p.html">Interactive Media Projects</a></li>
+        <li><a href="Pages/p6_professional_Projects_p.html">Professional Projects</a></li>
+        <li><a href="Pages/p2_game_p.html">Game Projects</a></li>
+      </ul>
       <ul class="image-button-list">
-        
-        
-        
-        <li class="interactive_project_bt">
-          <a href="Pages/p1_interactive_p.html">
-            <img
-              src="https://cdn.glitch.global/3887513c-cf0e-4995-8c2a-2f66f095b4cf/%E6%9C%AA%E5%91%BD%E5%90%8D%E7%9A%84%E4%BD%9C%E5%93%81-1.png?v=1744056035097"
-              class="bt"
-              alt="Interactive Project"
-              title="Click!"
-            />
-            <p>Interactive Media Projects</p>
-          </a>
-        </li>
-        
-        
-        
-        <li class="empty"></li><!--empty -->
-        
-        <li class="game_project_bt">
-          <a href="Pages/p2_game_p.html">
-            <img
-              src="https://cdn.glitch.global/3887513c-cf0e-4995-8c2a-2f66f095b4cf/%E6%9C%AA%E5%91%BD%E5%90%8D%E7%9A%84%E4%BD%9C%E5%93%81-2.png?v=1744056030814"
-              class="bt"
-              alt="Game"
-              title="Click!"
-            />
-            <p>Game Projects</p>
-          </a>
-        </li>
       <!--
         <li class="animation_project_bt">
           <a href="Pages/p4_animation_p.html">
