@@ -237,10 +237,15 @@ body, html {
   padding: 20px;
 }
 
-.Journey_left_video video {
+.Journey_left_video {
+  width: 645px; /* Big video size */
+  max-width: 100%;
+}
+.Journey_left_video iframe {
+  display: block;
   width: 100%;
   height: auto;
-  max-width: 645px; /* Big video size */
+  aspect-ratio: 16 / 9; /* YouTube video */
 }
 /* right -> down */
 
@@ -253,9 +258,11 @@ body, html {
   max-width: 645px; /* Match big video width */
 }
 
-.Journey_right_video video {
+.Journey_right_video iframe {
   width: 320px;
+  max-width: calc(50% - 3px);
   height: auto;
+  aspect-ratio: 16 / 9;
 }
 .glight_layout {
   display: flex;
@@ -269,8 +276,10 @@ body, html {
   padding: 20px;
 }
 .glight_video  {
-  width: 360px;
+  width: 315px;
+  max-width: 100%;
   height: auto;
+  aspect-ratio: 9 / 16; /* YouTube Shorts is vertical */
 }
 
 /* Button - Add it from the README instructions */

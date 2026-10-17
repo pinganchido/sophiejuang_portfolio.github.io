@@ -65,7 +65,7 @@ const MENU_ITEMS = [
     label: "Professional Projects",
     href: "Pages/p6_professional_Projects_p.html",
     offsetY: 0,
-    anim: { folder: "sources/anim/p6/", count: 66, fps: 60, x: 0, y: 20, zoom: 1 },
+    anim: { folder: "sources/anim/p6/", count: 66, fps: 60, x: 0, y: 30, zoom: 1 },
     cue: { frame: 44 },
   },
   {

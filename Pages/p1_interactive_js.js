@@ -51,10 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
     bgIndex = (bgIndex + 1) % bgColors.length;
   });
   */
-  // Change color based on video time
-  glight_video.addEventListener("timeupdate", () => {
-    const currTime = glight_video.currentTime;
-
+  // Change color based on the Gift me Light video time (read from the YouTube player)
+  function applyGlightColor(currTime) {
     if (currTime >= 9 && currTime < 27) {
       i2_section.style.backgroundColor = "#f4e190"; // yellow
     } 
@@ -76,7 +74,8 @@ document.addEventListener("DOMContentLoaded", function () {
     else {
       i2_section.style.backgroundColor = i2_oriCol; // default
     }
-  });
+  }
+  if (glight_video) setupYouTubeTime(glight_video, applyGlightColor);
 
   // Scroll background change for wrapper & body
   window.addEventListener("scroll", () => {
@@ -258,5 +257,27 @@ class Leaf {
   }
 }
 
-
-
+// Calls onTime(seconds) about 4 times a second while the YouTube video plays
+// (a YouTube iframe has no "timeupdate" event, so the IFrame Player API is used instead)
+function setupYouTubeTime(iframe, onTime) {
+  let timer = null;
+  const prevReady = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = () => {
+    if (prevReady) prevReady();
+    const player = new YT.Player(iframe, {
+      events: {
+        onStateChange: (e) => {
+          clearInterval(timer);
+          if (e.data === YT.PlayerState.PLAYING) {
+            timer = setInterval(() => onTime(player.getCurrentTime()), 250);
+          } else {
+            onTime(player.getCurrentTime());
+          }
+        },
+      },
+    });
+  };
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+}
