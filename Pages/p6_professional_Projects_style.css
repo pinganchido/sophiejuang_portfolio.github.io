@@ -385,3 +385,40 @@ iframe.media_main {
   height: auto;
   border-radius: 6px;
 }
+
+/* Video + tall photo side by side with the same height.
+   Their widths follow their shapes: video 16:9, photo 265:507 -> photo is 0.294x the video width */
+.media_pair {
+  display: flex;
+  gap: 6px;
+  width: 760px;
+  max-width: 100%;
+}
+.media_pair iframe {
+  flex: 1 1 0;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+}
+.media_pair img {
+  flex: 0.294 1 0;
+  min-width: 0;
+  aspect-ratio: 265 / 507;
+  border-radius: 6px;
+}
+/* Phones: stack them */
+@media (max-width: 600px) {
+  .media_pair {
+    flex-direction: column;
+    align-items: center;
+  }
+  .media_pair iframe {
+    flex: none;
+    width: 100%;
+  }
+  .media_pair img {
+    flex: none;
+    width: auto;
+    height: 360px;
+  }
+}

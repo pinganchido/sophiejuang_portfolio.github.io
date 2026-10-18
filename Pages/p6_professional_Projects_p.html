@@ -54,19 +54,18 @@
             技術：Sensor Integration、Network Communication（UDP／WebSocket）、Backend API Integration、Data Management
           </p>
         </div>
-        <div class="glight_layout">
-          <!-- To add a video: replace VIDEO_ID with the YouTube video id and remove the comment marks -->
-          <!--
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/VIDEO_ID"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-          -->
+        <div class="project_media">
+          <!-- Video and photo side by side, same height -->
+          <div class="media_pair">
+            <iframe
+              src="https://www.youtube.com/embed/vYCFjYv_x_w"
+              title="富邦育樂｜林志傑退休展互動體驗"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <img src="../sources/PImg/Lin_Jump.webp" alt="跳高互動遊戲" loading="lazy" />
+          </div>
         </div>
       </div>
       <!-- 2 -->
@@ -79,7 +78,7 @@
             <li>負責 Unity 機器人互動系統開發，建立角色動畫控制與互動流程，供客戶端操作與整合。</li>
             <li>整合 OBS、NDI 與 Unity，將 OBS 擷取的網頁畫面透過 NDI 傳輸至 Unity 顯示。</li>
             <li>協助開發角色動畫測試控制網頁，透過 WebSocket 傳送控制訊息至 Unity，驅動角色動畫。</li>
-            <li>重整 Arduino 與 Unity 的感測器串接架構，實作 COM Port 自動搜尋、裝置辨識、通訊握手與斷線自動重新連線機制，降低展場設備部署與感測器更換的維護成本。</li>
+            <li>重整 Arduino 與 Unity 的感測器串接架構，規劃COM Port 自動搜尋、裝置辨識、通訊握手與斷線自動重新連線機制，降低展場設備部署與感測器更換的維護成本。</li>
             <li>將 Serial Port 資料接收移至背景執行緒，避免阻塞 Unity 主執行緒，維持互動系統的資料接收與運作穩定性。</li>
           </ul>
           <p class="project_meta">
@@ -89,7 +88,10 @@
           </p>
         </div>
         <div class="project_media">
-          <img class="media_main media_portrait" src="../sources/PImg/HHTD.webp" alt="鴻海AI語音助理機器人" loading="lazy" />
+          <div class="media_row">
+            <img src="../sources/PImg/HHTD1.webp" alt="鴻海AI語音助理機器人 1" loading="lazy" />
+            <img src="../sources/PImg/HHTD2.webp" alt="鴻海AI語音助理機器人 2" loading="lazy" />
+          </div>
         </div>
       </div>
       <!-- 3 -->
@@ -143,7 +145,7 @@
           </p>
         </div>
         <div class="project_media">
-          <img class="media_main" src="../sources/PImg/CH_v4.webp" alt="正瀚生技展位" loading="lazy" />
+          <img class="media_main" src="../sources/PImg/CH_3_s.webp" alt="正瀚生技展位" loading="lazy" />
           <div class="media_row">
             <img src="../sources/PImg/CH3.webp" alt="影片管理與動態更新系統畫面 1" loading="lazy" />
             <img src="../sources/PImg/CH4.webp" alt="影片管理與動態更新系統畫面 2" loading="lazy" />
