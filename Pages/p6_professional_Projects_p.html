@@ -35,20 +35,27 @@
     </div>
     <div class="wrapper">
       <!-- 1 -->
-      <div id="i1" class="Journey_section">
-        <div>
-          <h2 class="subtitle">Project Title 1</h2>
-          <p class="introduce">
-            Project description goes here.
-          </p>
-          <p class="introduce">
-            <br />
-            Software:
+      <div id="i1" class="project_section" lang="zh-Hant">
+        <h2 class="subtitle">富邦育樂｜林志傑退休展互動體驗</h2>
+        <p class="introduce">本互動體驗以林志傑的運動紀錄為挑戰目標，玩家可與林志傑一同進行跑步、跳高及投籃三項互動遊戲，並將個人成績與其紀錄比較，判定挑戰結果。玩家透過入口處領取的 NFC 卡記錄姓名與各項成績，完成三項挑戰後，系統將依據遊玩結果呈現對應的動物類型，增加體驗的趣味性與個人化回饋。</p>
+        <div class="project_detail">
+          <p class="project_role"><strong>角色：</strong>Unity 互動系統與軟硬體整合開發</p>
+          <ul class="project_works">
+            <li>開發跑步與跳高體感互動遊戲，負責遊戲邏輯、互動流程與即時回饋。</li>
+            <li>整合感測設備，實作跑步遊戲的起終點偵測與計時，以及跳高遊戲的即時高度量測與成績判定。</li>
+            <li>串接排行榜後端 API，實作玩家名稱與成績上傳、資料儲存及即時排名顯示。</li>
+            <li>開發 NFC 玩家識別系統，整合玩家身份辨識、遊玩紀錄與成績資料。</li>
+            <li>整合入口姓名紀錄、各互動項目遊玩資料與後端成績管理，建立跨項目的玩家資料流程。</li>
+            <li>整合 Unity、感測設備、NFC 與後端 API，完成展場多設備互動系統。</li>
+          </ul>
+          <p class="project_meta">
+            Software：Unity、C#、Python<br />
+            Hardware：Orbbec Femto Bolt、Intel RealSense D435、Arduino、NFC Reader<br />
+            技術：Sensor Integration、Network Communication（UDP／WebSocket）、Backend API Integration、Data Management
           </p>
         </div>
-
         <div class="glight_layout">
-          <!-- Replace VIDEO_ID with the YouTube video id -->
+          <!-- To add a video: replace VIDEO_ID with the YouTube video id and remove the comment marks -->
           <!--
           <iframe
             width="560"
@@ -63,40 +70,86 @@
         </div>
       </div>
       <!-- 2 -->
-      <div id="i2" class="glight_section">
-        <div>
-          <h2 class="subtitle">Project Title 2</h2>
-          <p class="introduce">
-            Project description goes here.
+      <div id="i2" class="project_section" lang="zh-Hant">
+        <h2 class="subtitle">鴻海｜AI語音助理機器人</h2>
+        <p class="introduce">此專案以旅遊行程規劃為主題，使用者靠近機器人後，即可透過麥克風進行語音對話，由機器人透過互動問答協助使用者規劃旅遊行程。</p>
+        <div class="project_detail">
+          <p class="project_role"><strong>角色：</strong>Unity 系統架構與軟硬體整合</p>
+          <ul class="project_works">
+            <li>負責 Unity 機器人互動系統開發，建立角色動畫控制與互動流程，供客戶端操作與整合。</li>
+            <li>整合 OBS、NDI 與 Unity，將 OBS 擷取的網頁畫面透過 NDI 傳輸至 Unity 顯示。</li>
+            <li>協助開發角色動畫測試控制網頁，透過 WebSocket 傳送控制訊息至 Unity，驅動角色動畫。</li>
+            <li>重整 Arduino 與 Unity 的感測器串接架構，實作 COM Port 自動搜尋、裝置辨識、通訊握手與斷線自動重新連線機制，降低展場設備部署與感測器更換的維護成本。</li>
+            <li>將 Serial Port 資料接收移至背景執行緒，避免阻塞 Unity 主執行緒，維持互動系統的資料接收與運作穩定性。</li>
+          </ul>
+          <p class="project_meta">
+            Software：Unity、C#、OBS<br />
+            Hardware：Arduino、Ultrasonic Sensor<br />
+            技術：Sensor Integration、Multimedia Integration、Network Communication（WebSocket / NDI）
           </p>
-          <p class="introduce">
-            <br />
-            Software:
-          </p>
-          <!--
-          <p>
-            <a href="LINK" target="_blank">Detail Introduction</a>
-          </p>
-          -->
         </div>
-
-        <div class="glight_layout">
-          <!-- Replace VIDEO_ID with the YouTube video id -->
-          <!--
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/VIDEO_ID"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-          -->
+        <div class="project_media">
+          <img class="media_main media_portrait" src="../sources/PImg/HHTD.webp" alt="鴻海AI語音助理機器人" loading="lazy" />
         </div>
       </div>
       <!-- 3 -->
-      <div id="i3" class="other_section"></div>
+      <div id="i3" class="project_section" lang="zh-Hant">
+        <h2 class="subtitle">聖誕小遊戲</h2>
+        <p class="introduce">本遊戲以聖誕節為主題，玩家操控公司吉祥物，配合音樂節奏將飛出的聖誕飾品打回聖誕樹上。考量吉祥物追求完美的角色個性，將整理與裝飾聖誕樹的概念融入玩法，打造結合節奏操作與角色特色的聖誕小遊戲。</p>
+        <div class="project_detail">
+          <p class="project_role"><strong>角色：</strong>遊戲企劃與 Unity／網頁遊戲開發</p>
+          <ul class="project_works">
+            <li>主導遊戲概念發想、內容企劃、玩法設計與視覺方向規劃。</li>
+            <li>負責 Unity 遊戲架構、核心互動邏輯與流程控制開發。</li>
+            <li>製作角色、場景物件與互動事件動畫，建立遊戲操作與視覺回饋。</li>
+          </ul>
+          <p class="project_meta">
+            Software：Unity、C#<br />
+            技術：Game Development<br />
+            開發狀態：核心功能已完成，尚未完成完整玩家回饋測試與後續迭代。
+          </p>
+        </div>
+        <div class="project_media">
+          <iframe
+            class="media_main"
+            src="https://www.youtube.com/embed/QR5szRaavLA"
+            title="聖誕小遊戲"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+          <div class="media_row">
+            <img src="../sources/PImg/Xmas1.webp" alt="聖誕小遊戲畫面 1" loading="lazy" />
+            <img src="../sources/PImg/Xmas2.webp" alt="聖誕小遊戲畫面 2" loading="lazy" />
+            <img src="../sources/PImg/Xmas3.webp" alt="聖誕小遊戲畫面 3" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div id="i4" class="project_section" lang="zh-Hant">
+        <h2 class="subtitle">正瀚生技｜影片管理與動態更新系統</h2>
+        <p class="introduce">使用者透過下方透明螢幕點選選項，上方三面螢幕便會同步呈現對應的資訊內容，其中左右兩側顯示圖片，中央螢幕播放影片。</p>
+        <div class="project_detail">
+          <p class="project_role"><strong>角色：</strong>系統架構與工具開發</p>
+          <ul class="project_works">
+            <li>針對大量影片內嵌 Unity 專案造成的容量負擔，以及更新內容需重新編譯與部署的問題，設計動態影片管理與更新機制。</li>
+            <li>以資料夾結構搭配 CSV／Excel（.xlsx）管理影片路徑與中繼資料，建立可擴充的本地影音資料管理機制。</li>
+            <li>開發 Unity Runtime 動態影片讀取機制，使影片內容與主程式解耦，支援外部影片內容更新。</li>
+            <li>開發獨立影片更新包製作工具，可針對指定影片產生更新包，無須重新編譯 Unity 主程式。</li>
+          </ul>
+          <p class="project_meta">
+            Software：Unity、C#、Python<br />
+            技術：Runtime Asset Loading、File-based Data Management、Tool Development
+          </p>
+        </div>
+        <div class="project_media">
+          <img class="media_main" src="../sources/PImg/CH_v4.webp" alt="正瀚生技展位" loading="lazy" />
+          <div class="media_row">
+            <img src="../sources/PImg/CH3.webp" alt="影片管理與動態更新系統畫面 1" loading="lazy" />
+            <img src="../sources/PImg/CH4.webp" alt="影片管理與動態更新系統畫面 2" loading="lazy" />
+          </div>
+        </div>
+      </div>
     </div>
     <div class="instructions">
       <p>© 2025 Sophie Juang. All rights reserved.</p>
