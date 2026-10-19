@@ -152,6 +152,7 @@ const SQUEEZE_RETURN_DAMPING = 0.9;
 const SQUEEZE_RETURN_MAX_SPEED = 25; // px per frame on the way home (lower = slower trip, longer trail)
 const SQUEEZE_HINT = "hold & drag";
 const IS_TOUCH = window.matchMedia("(hover: none)").matches; // phones / tablets
+const TOUCH_HOVER_KEEP = 0.8; // touch: seconds a ball stays "active" after the finger slides off / lifts
 
 const blob = {
   owner: null, // the button it squeezes out of
@@ -171,6 +172,8 @@ const blob = {
 };
 
 let cueOn = false;
+let menuStacked = false; // phone layout: balls in one column
+const touchHover = { btn: null, until: 0 };
 let menuButtons = [];
 let menuCanvas = null; // the <canvas> element
 let menuFocusIndex = -1; // button focused by keyboard (Tab)
@@ -227,6 +230,7 @@ function layoutMenu() {
   const holder = document.getElementById("menu-canvas");
   const w = holder.clientWidth;
   const stacked = w < MENU_MOBILE_WIDTH;
+  menuStacked = stacked;
   const cols = stacked ? 1 : menuButtons.length;
   const cellW = w / cols;
   const maxScale = max(MENU_HOVER_SCALE, MENU_IDLE_SCALE_MAX);
@@ -269,6 +273,25 @@ function isOverButton(b) {
   return dist(mouseX, mouseY, b.x, b.y) < (b.size * b.scale) / 2;
 }
 
+// Desktop: the ball under the mouse.
+// Touch screens: the ball under the finger while it slides over the balls,
+// kept for a moment after the finger leaves it so the effect can be seen.
+// (A plain tap still opens the page, see mouseClicked.)
+function getActiveButton() {
+  const b = getHoveredButton();
+  if (!IS_TOUCH) return b;
+  if (touches.length > 0) {
+    if (b) {
+      touchHover.btn = b;
+      touchHover.until = millis() + TOUCH_HOVER_KEEP * 1000;
+    } else if (touchHover.btn && millis() >= touchHover.until) {
+      touchHover.btn = null;
+    }
+    return b || (millis() < touchHover.until ? touchHover.btn : null);
+  }
+  return millis() < touchHover.until ? touchHover.btn : null;
+}
+
 function getHoveredButton() {
   if (blob.dragging || isOverBlob(mouseX, mouseY)) return null; // the small ball takes priority
   return menuButtons.find(isOverButton) || null;
@@ -276,7 +299,7 @@ function getHoveredButton() {
 
 function draw() {
   clear();
-  const hovered = getHoveredButton();
+  const hovered = getActiveButton();
   if (blob.dragging) cursor("grabbing");
   else if (isOverBlob(mouseX, mouseY)) cursor("grab");
   else cursor(hovered ? HAND : ARROW);
@@ -525,11 +548,18 @@ function isOverBlob(x, y) {
 }
 
 // Where the small ball rests: above its ball when out, inside it (hidden) when not
+// Direction it pops out to: up on desktop / tablets; down-left on phones
+// (in the phone layout the space above the Game ball is taken by the ball and label above it)
+function blobDir() {
+  return IS_TOUCH && menuStacked ? { x: -Math.SQRT1_2, y: Math.SQRT1_2 } : { x: 0, y: -1 };
+}
+
 function blobHome(out) {
   const o = blob.owner;
   const R = (o.size * o.scale * MENU_MASK_RATIO) / 2;
-  if (!out) return { x: o.x, y: o.y - R * 0.4 };
-  return { x: o.x, y: o.y - R - R * SQUEEZE_GAP - blob.r };
+  const d = blobDir();
+  const dist = out ? R + R * SQUEEZE_GAP + blob.r : R * 0.4;
+  return { x: o.x + d.x * dist, y: o.y + d.y * dist };
 }
 
 function updateBlob(hovered) {
@@ -609,10 +639,16 @@ function drawBlob() {
   if (blob.hint > 0.01) {
     noStroke();
     fill(...MENU_TEXT_COLOR, blob.hint * (170 + 60 * sin(millis() * 0.004)));
-    textAlign(CENTER, BOTTOM);
     textSize(14);
     textStyle(NORMAL);
-    text(SQUEEZE_HINT, blob.x, blob.y - blob.r - 10);
+    if (blobDir().y > 0) {
+      // popped out downward: hint below it, away from the ball
+      textAlign(CENTER, TOP);
+      text(SQUEEZE_HINT, blob.x, blob.y + blob.r + 10);
+    } else {
+      textAlign(CENTER, BOTTOM);
+      text(SQUEEZE_HINT, blob.x, blob.y - blob.r - 10);
+    }
   }
 }
 
