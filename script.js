@@ -153,6 +153,9 @@ const SQUEEZE_RETURN_MAX_SPEED = 25; // px per frame on the way home (lower = sl
 const SQUEEZE_HINT = "hold & drag";
 const IS_TOUCH = window.matchMedia("(hover: none)").matches; // phones / tablets
 const TOUCH_HOVER_KEEP = 0.8; // touch: seconds a ball stays "active" after the finger slides off / lifts
+const LONG_PRESS_TIME = 0.6; // touch: hold a ball this long (seconds) to open its page
+const LONG_PRESS_MOVE = 12; // touch: moving the finger more than this (px) cancels the long press (e.g. scrolling)
+const LONG_PRESS_RING_DELAY = 0.15; // the progress ring appears after this, so quick taps don't flash it
 
 const blob = {
   owner: null, // the button it squeezes out of
@@ -174,6 +177,7 @@ const blob = {
 let cueOn = false;
 let menuStacked = false; // phone layout: balls in one column
 const touchHover = { btn: null, until: 0 };
+let longPress = null; // { btn, start, x, y } while a finger holds a ball
 let menuButtons = [];
 let menuCanvas = null; // the <canvas> element
 let menuFocusIndex = -1; // button focused by keyboard (Tab)
@@ -342,6 +346,7 @@ function draw() {
   if (blobBehind) drawBlob();
   curveOwners.forEach(drawMenuButton);
   menuButtons.forEach(drawMenuLabel);
+  updateLongPress();
   if (blob.visible && !blobBehind) drawBlob();
 
   // Dandelions float out from around the "dandelion" circle while it is active
@@ -682,6 +687,9 @@ function touchStarted() {
     startBlobDrag();
     return false;
   }
+  // Not prevented, so scrolling and taps still work; the long press is checked every frame
+  const b = getHoveredButton();
+  longPress = b ? { btn: b, start: millis(), x: mouseX, y: mouseY } : null;
 }
 
 function touchMoved() {
@@ -689,5 +697,33 @@ function touchMoved() {
 }
 
 function touchEnded() {
+  longPress = null;
   if (endBlobDrag()) return false;
+}
+
+// Touch: holding a ball opens its page (a tap still works too). Shows a progress ring while holding.
+function updateLongPress() {
+  if (!longPress) return;
+  const b = longPress.btn;
+  const moved = dist(mouseX, mouseY, longPress.x, longPress.y) > LONG_PRESS_MOVE;
+  if (touches.length === 0 || moved || !isOverButton(b)) {
+    longPress = null; // lifted, scrolled away or slid off the ball
+    return;
+  }
+  const t = (millis() - longPress.start) / 1000;
+  if (t >= LONG_PRESS_TIME) {
+    longPress = null;
+    window.location.href = b.href;
+    return;
+  }
+  if (t < LONG_PRESS_RING_DELAY) return;
+  const k = (t - LONG_PRESS_RING_DELAY) / (LONG_PRESS_TIME - LONG_PRESS_RING_DELAY);
+  const r = (b.size * b.scale * MENU_MASK_RATIO) / 2 + 10;
+  push();
+  noFill();
+  stroke(...MENU_TEXT_COLOR, 220);
+  strokeWeight(4);
+  strokeCap(ROUND);
+  arc(b.x, b.y, r * 2, r * 2, -HALF_PI, -HALF_PI + TWO_PI * k);
+  pop();
 }

@@ -390,6 +390,10 @@ h2 {
 #menu-canvas canvas {
   display: block;
   margin: 0 auto;
+  /* long press opens a page: don't show the phone's save-image / select menu */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 /* Fallback links: shown only if p5.js fails to load */
