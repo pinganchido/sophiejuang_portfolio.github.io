@@ -60,9 +60,11 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
           ></iframe>
-          <div class="media_row">
-            <img src="../sources/PImg/Taco1.webp" alt="Little Octopus Adventure screenshot 1" loading="lazy" />
-            <img src="../sources/PImg/Taco2.webp" alt="Little Octopus Adventure screenshot 2" loading="lazy" />
+          <!-- Mixed landscape / portrait images: each flex-grow = its width / height, so they share one height -->
+          <div class="media_row media_row_wide">
+            <img style="flex-grow: 1.78" src="../sources/PImg/Taco1.webp" alt="Little Octopus Adventure screenshot 1" loading="lazy" />
+            <img style="flex-grow: 1.78" src="../sources/PImg/Taco2.webp" alt="Little Octopus Adventure screenshot 2" loading="lazy" />
+            <img style="flex-grow: 0.75" src="../sources/PImg/Taco3.webp" alt="Octopus-shaped controller" loading="lazy" />
           </div>
         </div>
       </div>

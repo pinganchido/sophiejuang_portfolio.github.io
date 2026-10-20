@@ -385,3 +385,8 @@ iframe.media_main {
   height: auto;
   border-radius: 6px;
 }
+
+/* Wider row when it holds three images */
+.media_row_wide {
+  width: 760px;
+}
