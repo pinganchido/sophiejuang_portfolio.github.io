@@ -23,10 +23,10 @@ const dandelionBg = (() => {
 
   const EMIT_PER_STEP = 1; // new dandelions per step while hovered
   const EMIT_RADIUS = 0.6; // spawn distance from the center, relative to the circle radius (hidden behind it)
-  const OUT_SPEED_MIN = 1.5; // initial outward speed (px/step)
-  const OUT_SPEED_MAX = 4;
-  const OUT_PUSH = 0.3; // outward push during the first steps, to get out from behind the circle
-  const OUT_PUSH_STEPS = 15;
+  const OUT_SPEED_MIN = 3; // initial outward speed (px/step)
+  const OUT_SPEED_MAX = 7;
+  const OUT_PUSH = 0.6; // outward push during the first steps, to get out from behind the circle
+  const OUT_PUSH_STEPS = 10;
   const EMIT_RIGHT_BIAS = 0.6; // share of dandelions that come out of the right half (0.5 = even all around)
   const WIND_RIGHT = 0.25; // rightward breeze per step while the circle is producing dandelions
   const MAX_SPEED = 3; // drift speed after leaving the circle (px/step) so they float gently in the background
