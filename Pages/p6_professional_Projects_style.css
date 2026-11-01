@@ -422,3 +422,12 @@ iframe.media_main {
     height: 360px;
   }
 }
+
+/* Small heading + paragraph inside a project (e.g. "從角色設定到玩法") */
+.project_subhead {
+  margin: 0 0 4px;
+  font-weight: bold;
+}
+.project_text {
+  margin: 0 0 18px;
+}
